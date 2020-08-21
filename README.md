@@ -1,1 +1,1 @@
-# yalantis-olx
+Yalantis OLX
