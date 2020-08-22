@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import cartSVG from '../../images/cart.svg';
 
-export default function Header({ totalPrice }) {
+export default function Header({ totalPrice, totalQuantity }) {
   const { pathname } = useLocation();
 
   return (
@@ -19,6 +19,7 @@ export default function Header({ totalPrice }) {
             <Link to="/cart" className={styles.link}>
               <img src={cartSVG} alt="Cart" className={styles.cartImage} />
               <p className={styles.price}>Total price : {totalPrice}</p>
+              <span className={styles.quantityIcon}>{totalQuantity}</span>
             </Link>
           </div>
         ) : null}
@@ -27,4 +28,7 @@ export default function Header({ totalPrice }) {
   );
 }
 
-Header.propTypes = { totalPrice: proptypes.number.isRequired };
+Header.propTypes = {
+  totalPrice: proptypes.number.isRequired,
+  totalQuantity: proptypes.number.isRequired,
+};
