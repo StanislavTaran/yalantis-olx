@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import * as productsActions from '../products/productsActions';
+import { loaderOn, loaderOff } from './appActions';
 
 const errors = createReducer(
   {},
@@ -11,8 +12,11 @@ const errors = createReducer(
 
 const isLoading = createReducer(false, {
   [productsActions.getProductsRequest]: () => true,
+  [loaderOn]: () => true,
+
   [productsActions.getProductsSucces]: () => false,
   [productsActions.getProductsError]: () => false,
+  [loaderOff]: () => false,
 });
 
 export default combineReducers({

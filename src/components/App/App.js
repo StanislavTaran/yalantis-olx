@@ -6,7 +6,7 @@ import Loader from '../Loader/Loader';
 
 export default function App({ isLoading }) {
   return (
-    <div className="App">
+    <div className="App" style={{ paddingTop: '70px' }}>
       <Header />
       {isLoading && <Loader />}
       <PagesRouter />

@@ -9,11 +9,13 @@ export default function ProductsList({ products, fetchProducts }) {
   }, [fetchProducts]);
 
   return (
-    <ul className={styles.productList}>
-      {products.map(item => (
-        <ProductItem key={item.id} product={item} />
-      ))}
-    </ul>
+    <div className={styles.container}>
+      <ul className={styles.productList}>
+        {products.map(item => (
+          <ProductItem key={item.id} product={item} />
+        ))}
+      </ul>
+    </div>
   );
 }
 

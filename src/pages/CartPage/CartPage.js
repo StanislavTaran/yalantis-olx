@@ -3,7 +3,6 @@ import ProductListCart from '../../components/ProductListCart/ProductListCartCon
 export default function CartPage() {
   return (
     <section>
-      CART PAGE
       <ProductListCart />
     </section>
   );

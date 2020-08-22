@@ -6,6 +6,9 @@
 
 .item {
   margin: 5px 0;
-  display: flex;
-  justify-content: center;
+  position: relative;
+}
+
+.container {
+  padding: 10px 15px 20px 15px;
 }
