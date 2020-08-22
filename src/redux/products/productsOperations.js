@@ -9,12 +9,3 @@ export const fetchAllProducts = () => dispatch => {
     .then(res => dispatch(productsActions.getProductsSucces(res.data.items)))
     .catch(err => dispatch(productsActions.getProductsError(err)));
 };
-
-export const fetchOneProduct = () => dispatch => {
-  dispatch(productsActions.getProductRequest());
-
-  olxAPI
-    .fetchProduct()
-    .then(res => dispatch(productsActions.getProductSucces(res.data)))
-    .catch(err => dispatch(productsActions.getProductError(err)));
-};

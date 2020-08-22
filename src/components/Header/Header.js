@@ -1,16 +1,23 @@
 import React from 'react';
 import proptypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 
-export default function Header({ totalPrice = 0 }) {
+export default function Header({ totalPrice }) {
+  const { pathname } = useLocation();
+
   return (
     <header className={styles.header}>
-      <h1 className={styles.logo}>YOLX</h1>
+      <Link to="/" className={styles.link}>
+        <h1 className={styles.logo}>YOLX</h1>
+      </Link>
       <div className={styles.cart}>
-        <Link to="/cart" className={styles.link}>
-          <p>Total price : {totalPrice}</p>
-        </Link>
+        {pathname !== '/cart' ? (
+          <Link to="/cart" className={styles.link}>
+            <p>Total price : {totalPrice}</p>
+          </Link>
+        ) : null}
       </div>
     </header>
   );

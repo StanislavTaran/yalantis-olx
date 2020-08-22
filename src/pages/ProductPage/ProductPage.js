@@ -1,9 +1,24 @@
-import React, { useEffect } from 'react';
-// import propTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import ProductCardBig from '../../components/ProductCardBig/ProductCardBigContainer';
+import { fetchProduct } from '../../api/olxAPI';
 
 export default function ProductPage() {
-  return <section>PRODUCT PAGE</section>;
-}
+  const { productId } = useParams();
 
-// const mapStateToProps = state => ({});
+  const [product, setProduct] = useState({});
+  const [error, setError] = useState({});
+
+  useEffect(() => {
+    fetchProduct(productId)
+      .then(res => setProduct({ ...res.data }))
+      .catch(e => setError({ ...e }));
+  }, [productId]);
+
+  return (
+    <section>
+      <p>{error && error.message}</p>
+      <ProductCardBig product={product} />
+    </section>
+  );
+}

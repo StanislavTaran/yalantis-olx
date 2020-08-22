@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import PagesRouter from '../../routes/PagesRouter';
-import Header from '../Header/Header';
+import Header from '../Header/HeaderContainer';
 import Loader from '../Loader/Loader';
 
 export default function App({ isLoading }) {

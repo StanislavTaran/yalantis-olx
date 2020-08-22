@@ -1,22 +1,38 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { getDateString } from '../../helpers/dateOperations';
+import Button from '../share/buttons/Button/Button';
+import { isAlreadyInCart } from '../../helpers/productChecks';
 import styles from './ProductItem.module.css';
 
-export default function ProductItem({ product }) {
+export default function ProductItem({
+  product,
+  addProductToCart,
+  removeProductFromCart,
+  productsInCart,
+  fetchCurrentProduct,
+}) {
+  const isInCart = isAlreadyInCart(product.id, productsInCart);
+
   return (
-    <li>
+    <li className={styles.container}>
       <Link to={`/products/${product.id}`} className={styles.link}>
-        <div className={styles.container}>
-          <p className={styles.name}>{product.name}</p>
-          <p className={styles.price}>Price : {product.price}</p>
-          <p className={styles.origin}>Origin : {product.origin}</p>
-          <p className={styles.dateOfCreated}>
-            Created at : {moment(product.createdAt, moment.ISO_8601).format('YYYY-MM-DD')}
-          </p>
-        </div>
+        <p className={styles.name}>{product.name}</p>
+        <p className={styles.price}>Price : {product.price} USD</p>
+        <p className={styles.origin}>Origin : {product.origin}</p>
+        <p className={styles.dateOfCreated}>Created at : {getDateString(product.createdAt)}</p>
       </Link>
+
+      <div>
+        {isInCart ? (
+          <Button onClick={() => removeProductFromCart(product.id)}>Remove from cart</Button>
+        ) : (
+          <Button type="submit" onClick={() => addProductToCart(product)}>
+            Add to cart
+          </Button>
+        )}
+      </div>
     </li>
   );
 }
@@ -29,6 +45,8 @@ ProductItem.propTypes = {
     origin: propTypes.string.isRequired,
     createdAt: propTypes.string.isRequired,
     updatedAt: propTypes.string.isRequired,
-    isEditable: propTypes.string.isRequired,
+    isEditable: propTypes.bool.isRequired,
   }),
+  addProductToCart: propTypes.func.isRequired,
+  removeProductFromCart: propTypes.func.isRequired,
 };
