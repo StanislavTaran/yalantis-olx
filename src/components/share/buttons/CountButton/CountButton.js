@@ -17,4 +17,5 @@ CountButton.propTypes = {
 
 CountButton.defaultProps = {
   type: 'increment',
+  onClick: () => null,
 };

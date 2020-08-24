@@ -1,0 +1,30 @@
+.styleOrigin {
+  background-color: rgb(54, 54, 54);
+  color: #fff;
+  display: block;
+  padding: 2px;
+  width: 80px;
+  text-align: center;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.styleOriginAsia {
+  composes: styleOrigin;
+  background-color: rgb(153, 74, 0);
+}
+
+.styleOriginEurope {
+  composes: styleOrigin;
+  background-color: rgb(0, 92, 153);
+}
+
+.styleOriginUsa {
+  composes: styleOrigin;
+  background-color: rgb(180, 0, 0);
+}
+
+.styleOriginAfrica {
+  composes: styleOrigin;
+  background-color: rgb(42, 180, 0);
+}

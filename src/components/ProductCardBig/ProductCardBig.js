@@ -1,10 +1,12 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styles from './ProductCardBig.module.css';
-import { getDateString } from '../../helpers/dateOperations';
 import { isAlreadyInCart } from '../../helpers/productHelpers';
 import Button from '../share/buttons/Button/Button';
 import CountButton from '../share/buttons/CountButton/CountButton';
+import OriginLabel from '../share/labels/OriginLabel/OriginLabel';
+import DateLabel from '../share/labels/DateLabel/DateLabel';
+import SimpleLabel from '../share/labels/SimpleLabel/SimpleLabel';
 import image from '../../images/default-avatar.jpg';
 
 export default function ProductCardBig({
@@ -20,36 +22,16 @@ export default function ProductCardBig({
 }) {
   const isInCart = isAlreadyInCart(product.id, productsInCart);
   const quantity = (cart[product.id] && cart[product.id].quantity) || 0;
-  let styleOrigin;
-  switch (product.origin) {
-    case 'asia':
-      styleOrigin = styles.styleOriginAsia;
-      break;
-    case 'europe':
-      styleOrigin = styles.styleOriginEurope;
-      break;
-    case 'usa':
-      styleOrigin = styles.styleOriginUsa;
-      break;
-    case 'africa':
-      styleOrigin = styles.styleOriginAfrica;
-      break;
-    default:
-      styleOrigin = styles.styleOrigin;
-  }
 
   return (
     <div className={styles.container}>
       <div>
         <img src={image} alt={product.name} className={styles.image} />
-        <p className={styles.name}>{product.name}</p>
-        <p className={styles.price}>Price : {product.price} USD</p>
-        <p>
-          <span className={styleOrigin}>{product.origin}</span>
-        </p>
-        <p className={styles.cursive}>Created at : {getDateString(product.createdAt)}</p>
-        <p className={styles.cursive}>Updated at : {getDateString(product.updatedAt)}</p>
-
+        <SimpleLabel className={styles.name} text={product.name} />
+        <SimpleLabel text={'Price'} value={product.price} />
+        <OriginLabel origin={product.origin} />
+        <DateLabel text={'Created at'} iso={product.createdAt} />
+        <DateLabel text={'Updated at'} iso={product.updatedAt} />
         {children}
         {
           <div>
