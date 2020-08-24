@@ -1,5 +1,4 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import PagesRouter from '../../routes/PagesRouter';
 import Header from '../Header/Header';
@@ -16,7 +15,3 @@ export default function App() {
     </div>
   );
 }
-
-App.propTypes = {
-  isLoading: propTypes.bool.isRequired,
-};

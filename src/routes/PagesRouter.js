@@ -5,9 +5,7 @@ import HomePage from '../pages/HomePage/HomePage';
 
 const CartPageAsync = lazy(() => import('../pages/CartPage/CartPage' /* webpackChunkName: "cart-page" */));
 
-const ProductPageAsync = lazy(() =>
-  import('../pages/ProductPage/ProductPageContainer' /* webpackChunkName: "products-page" */),
-);
+const ProductPageAsync = lazy(() => import('../pages/ProductPage/ProductPage' /* webpackChunkName: "products-page" */));
 
 const PagesRouter = () => (
   <Suspense fallback={null}>

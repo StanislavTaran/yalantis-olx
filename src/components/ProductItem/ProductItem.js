@@ -12,7 +12,14 @@ import image from '../../images/default-avatar.jpg';
 import { isAlreadyInCart } from '../../helpers/productHelpers';
 import currencyFormatter from '../../helpers/currencyFormatter';
 
-export default function ProductItem({ product, addProductToCart, removeProductFromCart, productsInCart }) {
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductsIdInCart } from '../../redux/cart/cartSelectors';
+import { addProductToCart, removeProductFromCart } from '../../redux/cart/cartOperatins';
+
+export default function ProductItem({ product }) {
+  const productsInCart = useSelector(getProductsIdInCart);
+  const dispatch = useDispatch();
+
   const isInCart = isAlreadyInCart(product.id, productsInCart);
 
   return (
@@ -28,9 +35,9 @@ export default function ProductItem({ product, addProductToCart, removeProductFr
 
       <div>
         {isInCart ? (
-          <Button onClick={() => removeProductFromCart(product.id)}>Remove from cart</Button>
+          <Button onClick={() => dispatch(removeProductFromCart(product.id))}>Remove from cart</Button>
         ) : (
-          <Button type="submit" onClick={() => addProductToCart(product)}>
+          <Button type="submit" onClick={() => dispatch(addProductToCart(product))}>
             Add to cart
           </Button>
         )}
@@ -49,6 +56,4 @@ ProductItem.propTypes = {
     updatedAt: propTypes.string.isRequired,
     isEditable: propTypes.bool.isRequired,
   }),
-  addProductToCart: propTypes.func.isRequired,
-  removeProductFromCart: propTypes.func.isRequired,
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import proptypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -32,8 +31,3 @@ export default function Header() {
     </header>
   );
 }
-
-Header.propTypes = {
-  totalPrice: proptypes.number.isRequired,
-  totalQuantity: proptypes.number.isRequired,
-};

@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
-import propTypes from 'prop-types';
-import ProductItem from '../ProductItem/ProductItemContainer';
+import ProductItem from '../ProductItem/ProductItem';
 import styles from './ProductsList.module.css';
 
-export default function ProductsList({ products, fetchProducts }) {
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../redux/products/productsSelectors';
+import { fetchAllProducts } from '../../redux/products/productsOperations';
+
+export default function ProductsList() {
+  const products = useSelector(getProducts);
+  const dispatch = useDispatch();
+
+  useEffect(() => dispatch(fetchAllProducts()), [dispatch]);
 
   return (
     <div className={styles.container}>
@@ -18,12 +22,3 @@ export default function ProductsList({ products, fetchProducts }) {
     </div>
   );
 }
-
-ProductsList.propTypes = {
-  products: propTypes.arrayOf(
-    propTypes.shape({
-      id: propTypes.string.isRequired,
-    }),
-  ).isRequired,
-  fetchProducts: propTypes.func.isRequired,
-};

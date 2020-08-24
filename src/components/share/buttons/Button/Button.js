@@ -24,6 +24,6 @@ export default function CountButton({ onClick, type, children }) {
 }
 
 CountButton.propTypes = {
-  onClick: propTypes.func.isRequired,
+  onClick: propTypes.func,
   type: propTypes.oneOf(['submit', 'cancel']),
 };
