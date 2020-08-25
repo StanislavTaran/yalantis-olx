@@ -8,7 +8,7 @@ import { getIsLoading } from '../../redux/app/appSelectors';
 export default function App() {
   const isLoading = useSelector(getIsLoading);
   return (
-    <div className="App" style={{ paddingTop: '70px' }}>
+    <div className="App" style={{ paddingTop: '80px' }}>
       <Header />
       {isLoading && <Loader />}
       <PagesRouter />

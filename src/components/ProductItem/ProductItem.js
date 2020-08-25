@@ -11,6 +11,7 @@ import image from '../../images/default-avatar.jpg';
 
 import { isAlreadyInCart } from '../../helpers/productHelpers';
 import currencyFormatter from '../../helpers/currencyFormatter';
+import { PRODUCTS_PAGE_ROUTE } from '../../constants/routes';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsIdInCart } from '../../redux/cart/cartSelectors';
@@ -24,9 +25,9 @@ export default function ProductItem({ product }) {
 
   return (
     <li className={styles.container}>
-      <Link to={`/products/${product.id}`} className={styles.link}>
+      <Link to={`${PRODUCTS_PAGE_ROUTE}/${product.id}`} className={styles.link}>
         <img src={image} alt={product.name} className={styles.image} />
-        <SimpleLabel className={styles.name} text={product.name} />
+        <SimpleLabel overStyle={styles.name} text={product.name} />
         <SimpleLabel text={'Price'} value={currencyFormatter(product.price)} />
         <OriginLabel origin={product.origin} />
         <DateLabel text={'Created at'} iso={product.createdAt} />

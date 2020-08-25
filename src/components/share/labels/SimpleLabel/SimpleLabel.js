@@ -8,7 +8,7 @@ export default function SimpleLabel({ text, value, overStyle }) {
 SimpleLabel.propTypes = {
   text: propTypes.string.isRequired,
   value: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  overStyle: propTypes.objectOf(propTypes.string),
+  overStyle: propTypes.string,
 };
 
 SimpleLabel.defaultProps = {
