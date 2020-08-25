@@ -20,7 +20,7 @@ export default function Header() {
         <h1 className={styles.logo}>YOLX</h1>
       </Link>
       <div>
-        {pathname !== { CART_PAGE_ROUTE } ? (
+        {pathname !== CART_PAGE_ROUTE ? (
           <div className={styles.cart}>
             <Link to={CART_PAGE_ROUTE} className={styles.link}>
               <img src={cartSVG} alt="Cart" className={styles.cartImage} />
