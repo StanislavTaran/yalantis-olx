@@ -14,5 +14,5 @@ export default function DateLabel({ text, iso, overStyle }) {
 DateLabel.propTypes = {
   text: propTypes.string.isRequired,
   iso: propTypes.string.isRequired,
-  overStyle: propTypes.objectOf(propTypes.string),
+  overStyle: propTypes.string,
 };
