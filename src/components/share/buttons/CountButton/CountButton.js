@@ -2,20 +2,18 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './CountButton.module.css';
 
-export default function CountButton({ onClick, type }) {
+export default function CountButton({ onClick, children }) {
   return (
     <button onClick={onClick} className={styles.button}>
-      {type === 'decrement' ? '-' : '+'}
+      {children}
     </button>
   );
 }
 
 CountButton.propTypes = {
   onClick: propTypes.func,
-  type: propTypes.oneOf(['increment', 'decrement']),
 };
 
 CountButton.defaultProps = {
-  type: 'increment',
   onClick: () => null,
 };

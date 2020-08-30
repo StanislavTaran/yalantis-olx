@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './OriginLabel.module.css';
 
-export default function OriginLabel({ origin }) {
+const mapStyle = origin => {
   let styleOrigin;
   switch (origin) {
     case 'asia':
@@ -20,9 +20,14 @@ export default function OriginLabel({ origin }) {
     default:
       styleOrigin = styles.styleOrigin;
   }
+
+  return styleOrigin;
+};
+
+export default function OriginLabel({ origin }) {
   return (
     <p>
-      <span className={styleOrigin}>{origin}</span>
+      <span className={mapStyle(origin)}>{origin}</span>
     </p>
   );
 }

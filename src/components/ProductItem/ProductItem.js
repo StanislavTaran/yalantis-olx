@@ -2,16 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from '../share/buttons/Button/Button';
-import OriginLabel from '../share/labels/OriginLabel/OriginLabel';
-import DateLabel from '../share/labels/DateLabel/DateLabel';
-import SimpleLabel from '../share/labels/SimpleLabel/SimpleLabel';
+import BaseProductInfo from '../BaseProductInfo/BaseProductInfo';
 
 import styles from './ProductItem.module.css';
-import image from '../../images/default-avatar.jpg';
 
 import { isAlreadyInCart } from '../../helpers/productHelpers';
-import currencyFormatter from '../../helpers/currencyFormatter';
-import { PRODUCTS_PAGE_ROUTE } from '../../constants/routes';
+import routes from '../../constants/routes';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsIdInCart } from '../../redux/cart/cartSelectors';
@@ -23,22 +19,20 @@ export default function ProductItem({ product }) {
 
   const isInCart = isAlreadyInCart(product.id, productsInCart);
 
+  const handleRemoveProductFromCart = () => dispatch(removeProductFromCart(product.id));
+  const handleAddProductToCart = () => dispatch(addProductToCart(product));
+
   return (
     <li className={styles.container}>
-      <Link to={`${PRODUCTS_PAGE_ROUTE}/${product.id}`} className={styles.link}>
-        <img src={image} alt={product.name} className={styles.image} />
-        <SimpleLabel overStyle={styles.name} text={product.name} />
-        <SimpleLabel text={'Price'} value={currencyFormatter(product.price)} />
-        <OriginLabel origin={product.origin} />
-        <DateLabel text={'Created at'} iso={product.createdAt} />
-        <DateLabel text={'Updated at'} iso={product.updatedAt} />
+      <Link to={routes.PRODUCT.createPath(product.id)} className={styles.link}>
+        <BaseProductInfo product={product} />
       </Link>
 
       <div>
         {isInCart ? (
-          <Button onClick={() => dispatch(removeProductFromCart(product.id))}>Remove from cart</Button>
+          <Button onClick={handleRemoveProductFromCart}>Remove from cart</Button>
         ) : (
-          <Button type="submit" onClick={() => dispatch(addProductToCart(product))}>
+          <Button type="submit" onClick={handleAddProductToCart}>
             Add to cart
           </Button>
         )}
@@ -50,11 +44,5 @@ export default function ProductItem({ product }) {
 ProductItem.propTypes = {
   product: propTypes.shape({
     id: propTypes.string.isRequired,
-    name: propTypes.string.isRequired,
-    price: propTypes.number.isRequired,
-    origin: propTypes.string.isRequired,
-    createdAt: propTypes.string.isRequired,
-    updatedAt: propTypes.string.isRequired,
-    isEditable: propTypes.bool.isRequired,
   }),
 };

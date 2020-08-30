@@ -1,5 +1,15 @@
-// PAGE ROUTES
+export default {
+  INDEX: {
+    INDEX: '/',
+  },
 
-export const HOME_PAGE_ROUTE = '/';
-export const PRODUCTS_PAGE_ROUTE = `/products`;
-export const CART_PAGE_ROUTE = '/cart';
+  CART: {
+    INDEX: '/cart',
+  },
+
+  PRODUCT: {
+    createPath: productId => ['/products', productId].filter(Boolean).join('/'),
+    INDEX: '/products/:productId?',
+    DEFAULT_PATH: '/products',
+  },
+};

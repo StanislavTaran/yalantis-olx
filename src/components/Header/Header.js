@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SimpleLabel from '../share/labels/SimpleLabel/SimpleLabel';
-import { HOME_PAGE_ROUTE, CART_PAGE_ROUTE } from '../../constants/routes';
+import routes from '../../constants/routes';
 import styles from './Header.module.css';
 import cartSVG from '../../images/cart.svg';
 import currencyFormatter from '../../helpers/currencyFormatter';
@@ -16,15 +16,15 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <Link to={HOME_PAGE_ROUTE} className={styles.link}>
+      <Link to={routes.INDEX.INDEX} className={styles.link}>
         <h1 className={styles.logo}>YOLX</h1>
       </Link>
       <div>
-        {pathname !== CART_PAGE_ROUTE ? (
+        {pathname !== routes.CART.INDEX ? (
           <div className={styles.cart}>
-            <Link to={CART_PAGE_ROUTE} className={styles.link}>
+            <Link to={routes.CART.INDEX} className={styles.link}>
               <img src={cartSVG} alt="Cart" className={styles.cartImage} />
-              <SimpleLabel overStyle={styles.price} text="Total price" value={currencyFormatter(totalPrice)} />
+              <SimpleLabel overStyle={styles.price} text={`Total price : ${currencyFormatter(totalPrice) || 0}`} />
               <span className={styles.quantityIcon}>{totalQuantity}</span>
             </Link>
           </div>

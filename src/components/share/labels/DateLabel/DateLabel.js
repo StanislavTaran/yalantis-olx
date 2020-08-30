@@ -4,11 +4,7 @@ import { getDateString } from '../../../../helpers/dateOperations';
 import styles from './DateLabel.module.css';
 
 export default function DateLabel({ text, iso, overStyle }) {
-  return (
-    <p className={overStyle ? overStyle : styles.cursive}>
-      {text}: {getDateString(iso)}
-    </p>
-  );
+  return <p className={overStyle ? overStyle : styles.cursive}>{`${text}: ${getDateString(iso)}`}</p>;
 }
 
 DateLabel.propTypes = {

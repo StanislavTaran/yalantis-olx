@@ -19,7 +19,7 @@ export default function ProductListCart() {
         ))}
       </ul>
       {totalPrice > 0 ? (
-        <Button type="submit">Place your order {totalPrice} </Button>
+        <Button type="submit">{`Place your order ${totalPrice}`} </Button>
       ) : (
         <h2>Your cart is empty now...</h2>
       )}

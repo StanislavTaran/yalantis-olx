@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { HOME_PAGE_ROUTE, PRODUCTS_PAGE_ROUTE, CART_PAGE_ROUTE } from '../constants/routes';
+import routes from '../constants/routes';
 
 import HomePage from '../pages/HomePage/HomePage';
 
@@ -11,10 +11,10 @@ const ProductPageAsync = lazy(() => import('../pages/ProductPage/ProductPage' /*
 const PagesRouter = () => (
   <Suspense fallback={null}>
     <Switch>
-      <Route path={HOME_PAGE_ROUTE} exact component={HomePage} />
-      <Route path={CART_PAGE_ROUTE} component={CartPageAsync} />
-      <Route path={`${PRODUCTS_PAGE_ROUTE}/:productId`} component={ProductPageAsync} />
-      <Redirect to={HOME_PAGE_ROUTE} />
+      <Route path={routes.INDEX.INDEX} exact component={HomePage} />
+      <Route path={routes.CART.INDEX} component={CartPageAsync} />
+      <Route path={routes.PRODUCT.INDEX} component={ProductPageAsync} />
+      <Redirect to={routes.INDEX.INDEX} />
     </Switch>
   </Suspense>
 );

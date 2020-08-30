@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import ProductItem from '../ProductItem/ProductItem';
 import styles from './ProductsList.module.css';
 
@@ -10,7 +10,9 @@ export default function ProductsList() {
   const products = useSelector(getProducts);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(fetchAllProducts()), [dispatch]);
+  const fetchProducts = useCallback(() => dispatch(fetchAllProducts()), [dispatch]);
+
+  useEffect(() => fetchProducts(), [fetchProducts]);
 
   return (
     <div className={styles.container}>
