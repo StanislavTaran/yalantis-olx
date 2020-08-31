@@ -1,0 +1,54 @@
+.header {
+  height: 80px;
+  background-color: var(--second-main-color);
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.logo {
+  color: var(--first-secondary-color);
+}
+
+.cart {
+  height: 80%;
+  border: 1px solid var(--first-secondary-color);
+  border-radius: 4px;
+  position: relative;
+}
+
+.link {
+  color: var(--first-secondary-color);
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.cartImage {
+  display: block;
+  width: 30px;
+  margin: 0 auto;
+}
+.price {
+  margin: 0;
+  padding: 0 5px;
+  font-size: 16px;
+}
+
+.quantityIcon {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  background-color: var(--first-main-color);
+  height: 25px;
+  width: 25px;
+  font-size: 16px;
+  border-radius: 50%;
+  text-align: center;
+}
