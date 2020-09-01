@@ -21,6 +21,9 @@ const isLoading = createReducer(false, {
   [productsActions.getCurrentProductSucces]: () => false,
   [productsActions.getCurrentProductError]: () => false,
   [loaderOff]: () => false,
+
+  [productsActions.getOriginsRequest]: () => true,
+  [productsActions.getOriginsSucces]: () => false,
 });
 
 export default combineReducers({

@@ -16,7 +16,12 @@ const currentProduct = createReducer(
   },
 );
 
+const origins = createReducer([], {
+  [productsActions.getOriginsSucces]: (state, action) => [...action.payload],
+});
+
 export default combineReducers({
   products,
   currentProduct,
+  origins,
 });

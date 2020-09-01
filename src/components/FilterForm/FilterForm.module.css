@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 250px;
+  height: 100%;
+  background-color: var(--first-secondary-color);
+  color: var(--third-main-color);
+}
+
+.label {
+  display: block;
+}
+
+.priceRangeValues {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.priceContainer {
+  margin-bottom: 20px;
+}
