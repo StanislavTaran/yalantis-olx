@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import CheckboxGroup from 'react-checkbox-group';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -21,6 +21,8 @@ import { mapFiltersToParams } from '../../helpers/mapFiltersToParams';
 import Select from '../share/inputs/Select/Select';
 import Button from '../share/buttons/Button/Button';
 
+import { productsPerPage, productsPriceRange } from '../../constants/productsFilters';
+
 import styles from './FilterForm.module.css';
 import filtersIcon from '../../images/filters.svg';
 
@@ -35,9 +37,10 @@ export default function FilterForm() {
     return dispatch(setOrigins(item));
   };
 
-  const handleSetPrice = value => {
-    debounce(dispatch(setPrice(value)), 1500);
-  };
+  const handleSetPrice = useCallback(
+    debounce(value => dispatch(setPrice(value)), 10),
+    [dispatch],
+  );
 
   const handleSetQuantityProductsOnPage = e => dispatch(setPerPage(e.target.value));
 
@@ -63,7 +66,8 @@ export default function FilterForm() {
           <form id="filterForm">
             <div>
               <p>
-                Products on page <Select options={[50, 10, 25]} onChange={handleSetQuantityProductsOnPage} />
+                <span>Products on page </span>
+                <Select options={productsPerPage} onChange={handleSetQuantityProductsOnPage} />
               </p>
 
               <fieldset>
@@ -89,11 +93,10 @@ export default function FilterForm() {
                 </span>
                 <Range
                   className="price-filter-range"
-                  min={0}
-                  max={1000}
-                  value={[sliderValues[0], sliderValues[1]]}
+                  min={productsPriceRange[0]}
+                  max={productsPriceRange[1]}
+                  value={sliderValues}
                   allowCross={false}
-                  ariaLabelledByGroupForHandles={['0', '1000']}
                   pushable={100}
                   onChange={handleSetPrice}
                   tipFormatter={value => <span className="tooltip">{value}</span>}

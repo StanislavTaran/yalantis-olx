@@ -1,16 +1,17 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import * as filtersActions from './filtersActions';
+import { productsPriceRange, productsPerPage } from '../../constants/productsFilters';
 
 const origins = createReducer([], {
   [filtersActions.setOrigins]: (state, action) => action.payload,
 });
 
-const price = createReducer([0, 1000], {
+const price = createReducer(productsPriceRange, {
   [filtersActions.setPrice]: (state, action) => [...action.payload],
 });
 
-const perPage = createReducer(50, {
+const perPage = createReducer(productsPerPage[0], {
   [filtersActions.setPerPage]: (state, action) => action.payload,
 });
 
