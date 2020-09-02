@@ -5,8 +5,8 @@
   border-radius: 50%;
   width: 28px;
   height: 28px;
-  background-color: var(--first-main-color);
-  color: #fff;
+  border: var(--first-main-color) 2px solid;
+  color: var(--second-main-color);
   font-size: 20px;
 }
 

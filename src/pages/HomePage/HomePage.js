@@ -15,9 +15,13 @@ export default function HomePage() {
   }, [fetchProducts]);
 
   return (
-    <section className={styles.page}>
-      <FilterForm />
-      <ProductsList />
-    </section>
+    <>
+      <section>
+        <div className={styles.wrap}>
+          <FilterForm />
+          <ProductsList />
+        </div>
+      </section>
+    </>
   );
 }

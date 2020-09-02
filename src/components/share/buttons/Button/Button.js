@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './Button.module.css';
 
-export default function CountButton({ onClick, type, children }) {
+export default function Button({ onClick, type, children, disabled, overStyle }) {
   let buttonStyle;
 
   switch (type) {
@@ -17,13 +17,18 @@ export default function CountButton({ onClick, type, children }) {
   }
 
   return (
-    <button onClick={onClick} className={buttonStyle}>
+    <button onClick={onClick} className={overStyle ? overStyle : buttonStyle} disabled={disabled}>
       {children}
     </button>
   );
 }
 
-CountButton.propTypes = {
+Button.propTypes = {
   onClick: propTypes.func,
   type: propTypes.oneOf(['submit', 'cancel']),
+  disabled: propTypes.bool,
+};
+
+Button.defaultProps = {
+  disabled: false,
 };

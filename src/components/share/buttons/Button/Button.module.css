@@ -1,13 +1,13 @@
 .button {
   display: block;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 0 5px;
   border: none;
   border-radius: 8px;
   min-width: 200px;
   height: 50px;
   text-align: center;
-  background-color: rgb(99, 99, 99);
+  background-color: var(--first-main-color);
   color: var(--first-secondary-color);
   font-weight: 500;
   font-size: 20px;
@@ -19,10 +19,10 @@
 
 .buttonSubmit {
   composes: button;
-  background-color: var(--first-main-color);
+  background-color: var(--second-secondary-color);
 }
 
 .buttonCancel {
   composes: button;
-  background-color: var(--second-main-color);
+  background-color: var(--third-main-color);
 }

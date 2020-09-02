@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import { reducer as formReducer } from 'redux-form';
 import storage from 'redux-persist/lib/storage';
 import ReduxThunk from 'redux-thunk';
 
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   products,
   filters,
   cart: persistReducer(persistConfig, cart),
-  form: formReducer,
 });
 
 export const store = configureStore({
