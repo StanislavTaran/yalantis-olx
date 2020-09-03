@@ -2,10 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 260px;
-  height: 100%;
-  padding: 0 10px;
-  color: var(--first-secondary-color);
   font-weight: 500;
   position: fixed;
   top: 80px;
@@ -14,11 +10,10 @@
 
 .formContainer {
   background-color: var(--third-main-color);
-  padding: 0 10px;
-}
-
-.label {
-  display: block;
+  padding: 15px;
+  width: 260px;
+  height: 100%;
+  color: var(--first-secondary-color);
 }
 
 .priceRangeValues {
@@ -41,34 +36,4 @@
 
 .filtersShowButton:hover {
   cursor: pointer;
-}
-
-.filtersHideButton {
-  position: absolute;
-  right: 10px;
-  top: 60px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.6;
-  background-color: var(--first-main-color);
-  border: none;
-}
-.filtersHideButton:hover {
-  opacity: 1;
-}
-.filtersHideButton:before,
-.filtersHideButton:after {
-  position: absolute;
-  left: 15px;
-  top: 9px;
-  content: ' ';
-  height: 15px;
-  width: 2px;
-  background-color: #333;
-}
-.filtersHideButton:before {
-  transform: rotate(45deg);
-}
-.filtersHideButton:after {
-  transform: rotate(-45deg);
 }

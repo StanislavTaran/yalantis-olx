@@ -14,3 +14,7 @@ code {
 p {
   margin: 10px auto;
 }
+
+.overflow-hidden {
+  overflow: hidden;
+}
