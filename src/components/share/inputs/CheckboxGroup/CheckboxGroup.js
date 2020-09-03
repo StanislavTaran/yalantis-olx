@@ -22,6 +22,6 @@ export default function CheckboxGroup({ name, value, onChange, items }) {
 CheckboxGroup.propTypes = {
   name: propTypes.string.isRequired,
   value: propTypes.arrayOf(propTypes.string).isRequired,
-  onChange: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
   items: propTypes.arrayOf(propTypes.string).isRequired,
 };

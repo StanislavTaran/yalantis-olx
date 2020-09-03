@@ -17,6 +17,9 @@ const perPage = createReducer(productsPerPage[0], {
 
 const page = createReducer(1, {
   [filtersActions.setPage]: (state, action) => action.payload,
+  [filtersActions.setPerPage]: (state, action) => (state !== 1 ? 1 : state),
+  [filtersActions.setOrigins]: (state, action) => (state !== 1 ? 1 : state),
+  [filtersActions.setPrice]: (state, action) => (state !== 1 ? 1 : state),
 });
 
 export default combineReducers({ origins, price, perPage, page });

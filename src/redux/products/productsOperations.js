@@ -1,4 +1,5 @@
 import * as productsActions from './productsActions';
+import * as filtersActions from '../filters/filtersActions';
 import * as olxAPI from '../../api/olxAPI';
 
 export const fetchAllProducts = props => dispatch => {
@@ -6,7 +7,10 @@ export const fetchAllProducts = props => dispatch => {
 
   olxAPI
     .fetchProducts(props)
-    .then(res => dispatch(productsActions.getProductsSucces(res.data.items)))
+    .then(res => {
+      dispatch(productsActions.getProductsSucces(res.data));
+      dispatch(filtersActions.setPage(res.data.page));
+    })
     .catch(err => dispatch(productsActions.getProductsError(err)));
 };
 

@@ -12,7 +12,7 @@ import { getIsShowFilters } from '../../redux/app/appSelectors';
 import { showFilters } from '../../redux/app/appActions';
 
 import Select from '../share/inputs/Select/Select';
-import Button from '../share/buttons/Button/Button';
+import CircleButton from '../share/buttons/CircleButton/CircleButton';
 import CheckboxGroup from '../share/inputs/CheckboxGroup/CheckboxGroup';
 
 import { productsPerPage, productsPriceRange } from '../../constants/productsFilters';
@@ -43,9 +43,9 @@ export default function FilterForm() {
   return (
     <aside className={styles.container}>
       {!isShowFilters && (
-        <Button onClick={handleShowFilters} overStyle={styles.filtersShowButton}>
+        <CircleButton onClick={handleShowFilters} overStyle={styles.filtersShowButton}>
           <img src={filtersIcon} alt="filters" />
-        </Button>
+        </CircleButton>
       )}
       {isShowFilters && (
         <SidePortal onClose={handleShowFilters}>

@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import * as productsActions from './productsActions';
 
 const products = createReducer([], {
-  [productsActions.getProductsSucces]: (state, action) => [...action.payload],
+  [productsActions.getProductsSucces]: (state, action) => [...action.payload.items],
 });
 
 const currentProduct = createReducer(
@@ -20,8 +20,13 @@ const origins = createReducer([], {
   [productsActions.getOriginsSucces]: (state, action) => [...action.payload],
 });
 
+const totalProducts = createReducer(0, {
+  [productsActions.getProductsSucces]: (state, action) => action.payload.totalItems,
+});
+
 export default combineReducers({
   products,
   currentProduct,
   origins,
+  totalProducts,
 });
