@@ -42,12 +42,7 @@ export default function FilterForm() {
 
   return (
     <aside className={styles.container}>
-      {!isShowFilters && (
-        <CircleButton onClick={handleShowFilters} overStyle={styles.filtersShowButton}>
-          <img src={filtersIcon} alt="filters" />
-        </CircleButton>
-      )}
-      {isShowFilters && (
+      {isShowFilters ? (
         <SidePortal onClose={handleShowFilters}>
           <div className={styles.formContainer}>
             <form id="filterForm">
@@ -81,6 +76,10 @@ export default function FilterForm() {
             </form>
           </div>
         </SidePortal>
+      ) : (
+        <CircleButton onClick={handleShowFilters} overStyle={styles.filtersShowButton}>
+          <img src={filtersIcon} alt="filters" />
+        </CircleButton>
       )}
     </aside>
   );

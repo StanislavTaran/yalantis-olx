@@ -9,7 +9,7 @@ export default {
 
   PRODUCT: {
     createPath: productId => ['/products', productId].filter(Boolean).join('/'),
-    INDEX: '/products/:productId?',
+    INDEX: '/products/:productId',
     DEFAULT_PATH: '/products',
   },
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './Button.module.css';
 
-export default function Button({ onClick, type, children, disabled, overStyle }) {
+const mapStyle = type => {
   let buttonStyle;
 
   switch (type) {
@@ -15,9 +15,12 @@ export default function Button({ onClick, type, children, disabled, overStyle })
     default:
       buttonStyle = styles.button;
   }
+  return buttonStyle;
+};
 
+export default function Button({ onClick, type, children, disabled, overStyle }) {
   return (
-    <button onClick={onClick} className={overStyle ? overStyle : buttonStyle} disabled={disabled}>
+    <button onClick={onClick} className={overStyle ? overStyle : mapStyle(type)} disabled={disabled}>
       {children}
     </button>
   );
