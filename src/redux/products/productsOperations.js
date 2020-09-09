@@ -1,12 +1,16 @@
 import * as productsActions from './productsActions';
+import * as filtersActions from '../filters/filtersActions';
 import * as olxAPI from '../../api/olxAPI';
 
-export const fetchAllProducts = () => dispatch => {
+export const fetchAllProducts = props => dispatch => {
   dispatch(productsActions.getProductsRequest());
 
   olxAPI
-    .fetchProducts()
-    .then(res => dispatch(productsActions.getProductsSucces(res.data.items)))
+    .fetchProducts(props)
+    .then(res => {
+      dispatch(productsActions.getProductsSucces(res.data));
+      dispatch(filtersActions.setPage(res.data.page));
+    })
     .catch(err => dispatch(productsActions.getProductsError(err)));
 };
 
@@ -17,4 +21,13 @@ export const fetchOneProduct = productId => dispatch => {
     .fetchOneProduct(productId)
     .then(res => dispatch(productsActions.getCurrentProductSucces(res.data)))
     .catch(err => dispatch(productsActions.getCurrentProductError(err)));
+};
+
+export const fetchOrigins = () => dispatch => {
+  dispatch(productsActions.getOriginsRequest());
+
+  olxAPI
+    .fetchOrigins()
+    .then(res => dispatch(productsActions.getOriginsSucces(res.data.items)))
+    .catch(err => dispatch(productsActions.getOriginsError(err)));
 };

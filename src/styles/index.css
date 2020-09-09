@@ -4,9 +4,17 @@ body {
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ccc;
+  background-color: #e1e1e1;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+p {
+  margin: 10px auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }

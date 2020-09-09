@@ -49,10 +49,10 @@ export default function ProductCardBig({ product, withCountButtons, children }) 
                   <p>
                     Quantity in cart : <CountButton onClick={handleProductDecrement}>-</CountButton> {quantity}{' '}
                     <CountButton onClick={handleProductIncrement}>+</CountButton>
+                    <SimpleLabel text={`Price for ${quantity} units : ${mapPriceToCart(cart[product.id])}`} />
                   </p>
                 ) : null}
 
-                <SimpleLabel text={`Price for ${quantity} units : ${mapPriceToCart(cart[product.id])}`} />
                 <Button onClick={handleRemoveProductFromCart}>Remove from cart</Button>
               </>
             ) : (

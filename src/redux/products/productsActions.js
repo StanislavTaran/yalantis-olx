@@ -9,3 +9,9 @@ export const getProductsError = createAction('products/GET_PRODUCTS_ERROR');
 export const getCurrentProductRequest = createAction('products/GET_CURRENT_PRODUCT_REQUEST');
 export const getCurrentProductSucces = createAction('products/GET_CURRENT_PRODUCT_SUCCES');
 export const getCurrentProductError = createAction('products/GET_CURRENT_PRODUCT_ERROR');
+
+// ORIGINS
+
+export const getOriginsRequest = createAction('products/GET_ORIGINS_REQUEST');
+export const getOriginsSucces = createAction('products/GET_ORIGINS_SUCCES');
+export const getOriginsError = createAction('products/GET_ORIGINS_ERROR');

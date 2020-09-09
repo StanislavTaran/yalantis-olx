@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-weight: 500;
+  position: fixed;
+  top: 80px;
+  z-index: 3;
+}
+
+.formContainer {
+  background-color: var(--third-main-color);
+  padding: 15px;
+  width: 260px;
+  height: 100%;
+  color: var(--first-secondary-color);
+}
+
+.priceRangeValues {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.priceContainer {
+  margin-bottom: 20px;
+}

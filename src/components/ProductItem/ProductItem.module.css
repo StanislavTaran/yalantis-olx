@@ -1,5 +1,6 @@
 .container {
   border-radius: 6px;
+  min-width: 300px;
   padding: 5px;
   margin: 0 0 20px 0;
   background-color: rgb(247, 247, 247);
@@ -16,7 +17,7 @@
 
 .image {
   display: block;
-  max-width: 300px;
+  width: 280px;
   object-fit: cover;
 }
 

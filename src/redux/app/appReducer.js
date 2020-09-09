@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import * as productsActions from '../products/productsActions';
-import { loaderOn, loaderOff } from './appActions';
+import { loaderOn, loaderOff, showFilters } from './appActions';
 
 const errors = createReducer(
   {},
@@ -21,9 +21,17 @@ const isLoading = createReducer(false, {
   [productsActions.getCurrentProductSucces]: () => false,
   [productsActions.getCurrentProductError]: () => false,
   [loaderOff]: () => false,
+
+  [productsActions.getOriginsRequest]: () => true,
+  [productsActions.getOriginsSucces]: () => false,
+});
+
+const isShowFilters = createReducer(false, {
+  [showFilters]: (state, action) => action.payload,
 });
 
 export default combineReducers({
   errors,
   isLoading,
+  isShowFilters,
 });

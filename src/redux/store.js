@@ -7,6 +7,7 @@ import ReduxThunk from 'redux-thunk';
 import products from './products/productsReducer';
 import app from './app/appReducer';
 import cart from './cart/cartReducer';
+import filters from './filters/filtersReducer';
 
 const persistConfig = {
   key: 'cart',
@@ -18,6 +19,7 @@ const middlewares = [ReduxThunk];
 const rootReducer = combineReducers({
   app,
   products,
+  filters,
   cart: persistReducer(persistConfig, cart),
 });
 
