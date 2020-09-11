@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import SidePortal from '../Portal/SidePortal';
+import SidePortal from '../Portal/SidePortal/SidePortal';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilteredOrigins } from '../../redux/filters/filtersSelectors';

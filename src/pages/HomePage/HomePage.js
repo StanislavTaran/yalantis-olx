@@ -11,6 +11,8 @@ import { mapFiltersToParams } from '../../helpers/mapFiltersToParams';
 import scrollUp from '../../helpers/scrollUp';
 import styles from './HomePage.module.css';
 
+import AddProductForm from '../../components/AddProductForm/AddProductForm';
+
 export default function HomePage() {
   const dispatch = useDispatch();
   const params = useSelector(getFilters);
@@ -32,6 +34,7 @@ export default function HomePage() {
   return (
     <>
       <section>
+        <AddProductForm />
         <div className={styles.wrap}>
           <FilterForm />
           <ProductsList />

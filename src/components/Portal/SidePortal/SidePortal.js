@@ -1,23 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { createPortal } from 'react-dom';
-import useOutsideClick from '../../hooks/useOutsideClick';
-import Button from '../share/buttons/Button/Button';
+import useOutsideClick from '../../../hooks/useOutsideClick';
+import useHideBodyOferflow from '../../../hooks/useHideBodyOferflow';
+import Button from '../../share/buttons/Button/Button';
 
 import styles from './SidePortal.module.css';
 
 export default function SidePortal({ onClose, children }) {
-  const childRef = useRef();
+  useHideBodyOferflow();
 
+  const childRef = useRef();
   useOutsideClick(childRef, () => {
     onClose();
   });
-
-  useEffect(() => {
-    document.body.className = 'overflow-hidden';
-    return () => {
-      document.body.className = '';
-    };
-  }, []);
 
   return createPortal(
     <div className={styles.container}>
