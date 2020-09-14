@@ -28,15 +28,17 @@ export default function ProductItem({ product }) {
         <BaseProductInfo product={product} />
       </Link>
 
-      <div>
-        {isInCart ? (
-          <Button onClick={handleRemoveProductFromCart}>Remove from cart</Button>
-        ) : (
-          <Button type="submit" onClick={handleAddProductToCart}>
-            Add to cart
-          </Button>
-        )}
-      </div>
+      {!product.isEditable && (
+        <div>
+          {isInCart ? (
+            <Button onClick={handleRemoveProductFromCart}>Remove from cart</Button>
+          ) : (
+            <Button type="submit" onClick={handleAddProductToCart}>
+              Add to cart
+            </Button>
+          )}
+        </div>
+      )}
     </li>
   );
 }

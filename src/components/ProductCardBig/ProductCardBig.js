@@ -35,13 +35,15 @@ export default function ProductCardBig({ product, withCountButtons, children }) 
   const handleAddProductToCart = () => dispatch(addProductToCart(product));
   const handleRemoveProductFromCart = () => dispatch(removeProductFromCart(product.id));
 
+  const isOwnProduct = !!product.isEditable;
+
   return (
     <div className={styles.container}>
       <div>
         <BaseProductInfo product={product} />
-
         {children}
-        {
+
+        {!isOwnProduct ? (
           <div>
             {isInCart ? (
               <>
@@ -61,7 +63,9 @@ export default function ProductCardBig({ product, withCountButtons, children }) 
               </Button>
             )}
           </div>
-        }
+        ) : (
+          <Button>Edit Product</Button>
+        )}
       </div>
     </div>
   );

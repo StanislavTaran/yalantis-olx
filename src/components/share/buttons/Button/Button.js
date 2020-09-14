@@ -2,8 +2,12 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './Button.module.css';
 
-const mapStyle = type => {
+const mapStyle = (type, disabled) => {
   let buttonStyle;
+
+  if (disabled) {
+    return (buttonStyle = styles.buttonDisabled);
+  }
 
   switch (type) {
     case 'submit':
@@ -15,12 +19,18 @@ const mapStyle = type => {
     default:
       buttonStyle = styles.button;
   }
+
   return buttonStyle;
 };
 
-export default function Button({ onClick, type, children, disabled, overStyle }) {
+export default function Button({ onClick, actionType, type, children, disabled, overStyle }) {
   return (
-    <button onClick={onClick} className={overStyle ? overStyle : mapStyle(type)} disabled={disabled}>
+    <button
+      type={actionType}
+      onClick={onClick}
+      className={overStyle ? overStyle : mapStyle(type, disabled)}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

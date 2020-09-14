@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SimpleLabel from '../share/labels/SimpleLabel/SimpleLabel';
 import routes from '../../constants/routes';
@@ -10,11 +10,17 @@ import cartSVG from '../../images/cart.svg';
 import plusSVG from '../../images/plus.svg';
 import currencyFormatter from '../../helpers/currencyFormatter';
 import { getTotalPrice, getTotalQuantity } from '../../redux/cart/cartSelectors';
+import { getIsShowProductForm } from '../../redux/app/appSelectors';
+import { showProductForm } from '../../redux/app/appActions';
 
 export default function Header() {
   const { pathname } = useLocation();
   const totalPrice = useSelector(getTotalPrice);
   const totalQuantity = useSelector(getTotalQuantity);
+
+  const dispatch = useDispatch();
+  const isShowProductForm = useSelector(getIsShowProductForm);
+  const handleOpenProductForm = () => dispatch(showProductForm(!isShowProductForm));
 
   return (
     <header className={styles.header}>
@@ -25,7 +31,10 @@ export default function Header() {
       <div className={styles.wrap}>
         {pathname !== routes.CART.INDEX ? (
           <>
-            <CircleButton>
+            <NavLink className={styles.link} activeClassName={styles.activeLink} to={routes.OWN_PRODUCTS.INDEX}>
+              My Products
+            </NavLink>
+            <CircleButton onClick={handleOpenProductForm}>
               <img src={plusSVG} alt="add product" />
             </CircleButton>
             <div className={styles.cart}>

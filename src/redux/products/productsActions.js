@@ -5,6 +5,11 @@ export const getProductsRequest = createAction('products/GET_PRODUCTS_REQUEST');
 export const getProductsSucces = createAction('products/GET_PRODUCTS_SUCCES');
 export const getProductsError = createAction('products/GET_PRODUCTS_ERROR');
 
+// OWN PRODUCTS
+export const getOwnProductsRequest = createAction('products/GET_OWN_PRODUCTS_REQUEST');
+export const getOwnProductsSucces = createAction('products/GET_OWN_PRODUCTS_SUCCES');
+export const getOwnProductsError = createAction('products/GET_OWN_PRODUCTS_ERROR');
+
 // CURRENT PRODUCT
 export const getCurrentProductRequest = createAction('products/GET_CURRENT_PRODUCT_REQUEST');
 export const getCurrentProductSucces = createAction('products/GET_CURRENT_PRODUCT_SUCCES');

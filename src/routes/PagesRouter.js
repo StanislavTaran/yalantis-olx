@@ -8,10 +8,15 @@ const CartPageAsync = lazy(() => import('../pages/CartPage/CartPage' /* webpackC
 
 const ProductPageAsync = lazy(() => import('../pages/ProductPage/ProductPage' /* webpackChunkName: "products-page" */));
 
+const OwnProductsPageAsync = lazy(() =>
+  import('../pages/OwnProductsPage/OwnProductsPage' /* webpackChunkName: "own-products-page" */),
+);
+
 const PagesRouter = () => (
   <Suspense fallback={null}>
     <Switch>
       <Route path={routes.INDEX.INDEX} exact component={HomePage} />
+      <Route path={routes.OWN_PRODUCTS.INDEX} exact component={OwnProductsPageAsync} />
       <Route path={routes.CART.INDEX} component={CartPageAsync} />
       <Route path={routes.PRODUCT.INDEX} component={ProductPageAsync} />
       <Redirect to={routes.INDEX.INDEX} />

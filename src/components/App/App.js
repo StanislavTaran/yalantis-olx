@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAuth } from '../../hooks/auth/useAuth';
 import { fetchOrigins } from '../../redux/products/productsOperations';
 
 import { useSelector } from 'react-redux';
@@ -11,12 +12,14 @@ import { getIsLoading } from '../../redux/app/appSelectors';
 import styles from './App.module.css';
 
 export default function App() {
+  const { authAsync } = useAuth();
   const dispatch = useDispatch();
   const getOrigins = useCallback(() => dispatch(fetchOrigins()), [dispatch]);
 
   useEffect(() => {
     getOrigins();
-  }, [getOrigins]);
+    authAsync();
+  }, [getOrigins, authAsync]);
 
   const isLoading = useSelector(getIsLoading);
   return (

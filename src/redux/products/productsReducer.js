@@ -4,6 +4,7 @@ import * as productsActions from './productsActions';
 
 const products = createReducer([], {
   [productsActions.getProductsSucces]: (state, action) => [...action.payload.items],
+  [productsActions.getOwnProductsSucces]: (state, action) => [...action.payload.items],
 });
 
 const currentProduct = createReducer(
@@ -22,6 +23,7 @@ const origins = createReducer([], {
 
 const totalProducts = createReducer(0, {
   [productsActions.getProductsSucces]: (state, action) => action.payload.totalItems,
+  [productsActions.getOwnProductsSucces]: (state, action) => action.payload.totalItems,
 });
 
 export default combineReducers({

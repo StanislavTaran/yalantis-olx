@@ -2,6 +2,20 @@ import * as productsActions from './productsActions';
 import * as filtersActions from '../filters/filtersActions';
 import * as olxAPI from '../../api/olxAPI';
 
+export const fetchOwnProducts = props => dispatch => {
+  dispatch(productsActions.getOwnProductsRequest());
+
+  olxAPI
+    .fetchOwnProducts(props)
+    .then(res => {
+      dispatch(productsActions.getOwnProductsSucces(res.data));
+      dispatch(filtersActions.setPage(res.data.page));
+    })
+    .catch(err => {
+      dispatch(productsActions.getOwnProductsError(err));
+    });
+};
+
 export const fetchAllProducts = props => dispatch => {
   dispatch(productsActions.getProductsRequest());
 

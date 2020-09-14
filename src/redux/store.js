@@ -8,6 +8,7 @@ import products from './products/productsReducer';
 import app from './app/appReducer';
 import cart from './cart/cartReducer';
 import filters from './filters/filtersReducer';
+import auth from './auth/authReducer';
 
 const persistConfig = {
   key: 'cart',
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   products,
   filters,
   cart: persistReducer(persistConfig, cart),
+  auth,
 });
 
 export const store = configureStore({
