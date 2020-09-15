@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from '../share/buttons/Button/Button';
 import BaseProductInfo from '../BaseProductInfo/BaseProductInfo';
 
+import briefcase from '../../images/briefcase.svg';
 import styles from './ProductItem.module.css';
 
 import { isAlreadyInCart } from '../../helpers/productHelpers';
@@ -12,6 +13,8 @@ import routes from '../../constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsIdInCart } from '../../redux/cart/cartSelectors';
 import { addProductToCart, removeProductFromCart } from '../../redux/cart/cartOperatins';
+import { showProductForm } from '../../redux/app/appActions';
+import { setEditedProduct } from '../../redux/products/productsActions';
 
 export default function ProductItem({ product }) {
   const productsInCart = useSelector(getProductsIdInCart);
@@ -21,14 +24,24 @@ export default function ProductItem({ product }) {
 
   const handleRemoveProductFromCart = () => dispatch(removeProductFromCart(product.id));
   const handleAddProductToCart = () => dispatch(addProductToCart(product));
+  const handleEditProduct = () => {
+    dispatch(setEditedProduct(product));
+    dispatch(showProductForm(true));
+  };
+
+  const isOwnProduct = product.isEditable;
 
   return (
     <li className={styles.container}>
       <Link to={routes.PRODUCT.createPath(product.id)} className={styles.link}>
         <BaseProductInfo product={product} />
       </Link>
-
-      {!product.isEditable && (
+      {isOwnProduct && (
+        <div className={styles.icon}>
+          <img src={briefcase} alt="own product" />
+        </div>
+      )}
+      {!isOwnProduct ? (
         <div>
           {isInCart ? (
             <Button onClick={handleRemoveProductFromCart}>Remove from cart</Button>
@@ -38,6 +51,10 @@ export default function ProductItem({ product }) {
             </Button>
           )}
         </div>
+      ) : (
+        <Button type="edit" onClick={handleEditProduct} className={styles.editButton}>
+          Edit Product
+        </Button>
       )}
     </li>
   );

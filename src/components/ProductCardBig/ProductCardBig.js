@@ -1,8 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styles from './ProductCardBig.module.css';
-import { isAlreadyInCart } from '../../helpers/productHelpers';
-import { reducerForPrice } from '../../helpers/productHelpers';
+import { isAlreadyInCart, reducerForPrice } from '../../helpers/productHelpers';
 import currencyFormatter from '../../helpers/currencyFormatter';
 import Button from '../share/buttons/Button/Button';
 import CountButton from '../share/buttons/CountButton/CountButton';
@@ -17,6 +16,8 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from '../../redux/cart/cartOperatins';
+import { setEditedProduct } from '../../redux/products/productsActions';
+import { showProductForm } from '../../redux/app/appActions';
 
 const mapPriceToCart = product => {
   return currencyFormatter(reducerForPrice(0, product));
@@ -34,6 +35,11 @@ export default function ProductCardBig({ product, withCountButtons, children }) 
   const handleProductDecrement = () => dispatch(decrementQuantity(product.id));
   const handleAddProductToCart = () => dispatch(addProductToCart(product));
   const handleRemoveProductFromCart = () => dispatch(removeProductFromCart(product.id));
+
+  const handleEditClick = () => {
+    dispatch(setEditedProduct(product));
+    dispatch(showProductForm(true));
+  };
 
   const isOwnProduct = !!product.isEditable;
 
@@ -64,7 +70,7 @@ export default function ProductCardBig({ product, withCountButtons, children }) 
             )}
           </div>
         ) : (
-          <Button>Edit Product</Button>
+          <Button onClick={handleEditClick}>Edit Product</Button>
         )}
       </div>
     </div>

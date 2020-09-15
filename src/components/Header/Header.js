@@ -12,6 +12,7 @@ import currencyFormatter from '../../helpers/currencyFormatter';
 import { getTotalPrice, getTotalQuantity } from '../../redux/cart/cartSelectors';
 import { getIsShowProductForm } from '../../redux/app/appSelectors';
 import { showProductForm } from '../../redux/app/appActions';
+import { setEditedProduct } from '../../redux/products/productsActions';
 
 export default function Header() {
   const { pathname } = useLocation();
@@ -20,7 +21,11 @@ export default function Header() {
 
   const dispatch = useDispatch();
   const isShowProductForm = useSelector(getIsShowProductForm);
-  const handleOpenProductForm = () => dispatch(showProductForm(!isShowProductForm));
+
+  const handleOpenProductForm = () => {
+    dispatch(setEditedProduct({}));
+    dispatch(showProductForm(!isShowProductForm));
+  };
 
   return (
     <header className={styles.header}>

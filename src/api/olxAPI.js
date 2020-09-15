@@ -4,6 +4,7 @@ import API_URLs from '../constants/olxAPI';
 
 const token = localStorage.getItem('token');
 
+axios.defaults.headers.common['Authorization'] = token;
 axios.defaults.baseURL = API_URLs.BASE_URL.INDEX;
 axios.defaults.params = {};
 
@@ -19,18 +20,12 @@ export const fetchProducts = params =>
 
 export const fetchOneProduct = productId =>
   axios({
-    headers: {
-      Authorization: token,
-    },
     method: 'get',
     url: API_URLs.PRODUCT.createURL(productId),
   });
 
 export const fetchOwnProducts = params =>
   axios({
-    headers: {
-      Authorization: token,
-    },
     method: 'get',
     url: API_URLs.PRODUCTS.INDEX,
     params: { editable: true, ...params },
@@ -44,9 +39,14 @@ export const postProduct = productData =>
     method: 'post',
     url: API_URLs.PRODUCTS.INDEX,
     data: { product: productData },
-    headers: {
-      Authorization: token,
-    },
+  });
+
+export const patchProduct = (productId, productData) =>
+  axios({
+    method: 'patch',
+    url: API_URLs.PRODUCT.createURL(productId),
+    params: { productId },
+    data: { product: productData },
   });
 
 export const fetchOrigins = () => axios({ method: 'get', url: API_URLs.ORIGINS.INDEX });

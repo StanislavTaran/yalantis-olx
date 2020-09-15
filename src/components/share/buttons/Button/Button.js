@@ -16,6 +16,9 @@ const mapStyle = (type, disabled) => {
     case 'cancel':
       buttonStyle = styles.buttonCancel;
       break;
+    case 'edit':
+      buttonStyle = styles.buttonEdit;
+      break;
     default:
       buttonStyle = styles.button;
   }

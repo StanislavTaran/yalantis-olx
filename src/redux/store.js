@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
+import { reducer as toastrReducer } from 'react-redux-toastr';
 import storage from 'redux-persist/lib/storage';
 import ReduxThunk from 'redux-thunk';
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   filters,
   cart: persistReducer(persistConfig, cart),
   auth,
+  toastr: toastrReducer,
 });
 
 export const store = configureStore({

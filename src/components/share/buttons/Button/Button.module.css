@@ -27,6 +27,11 @@
   background-color: var(--third-main-color);
 }
 
+.buttonEdit {
+  composes: button;
+  background-color: var(--second-main-color);
+}
+
 .buttonDisabled {
   composes: button;
   background-color: rgb(126, 125, 125);
