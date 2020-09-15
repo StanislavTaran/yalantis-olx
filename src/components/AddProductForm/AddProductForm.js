@@ -15,11 +15,11 @@ import styles from './AddProductForm.module.css';
 function AddProductForm({ origins }) {
   const dispatch = useDispatch();
 
-  const isShowProductForm = useSelector(getIsShowProductForm);
-  const handleOpenProductForm = () => dispatch(showProductForm(!isShowProductForm));
-
   const editedProduct = useSelector(getEditedProduct);
   const isEdit = !!Object.keys(editedProduct).length;
+
+  const isShowProductForm = useSelector(getIsShowProductForm);
+  const handleOpenProductForm = () => dispatch(showProductForm(!isShowProductForm));
 
   const handleSubmit = (id, values) => {
     isEdit ? dispatch(patchProduct(id, values)) : dispatch(postProduct(values));
@@ -39,7 +39,7 @@ function AddProductForm({ origins }) {
         handleSubmit(editedProduct.id, values);
       }}
     >
-      {({ errors, touched, values, isSubmitting, handleChange, handleBlur }) => (
+      {({ errors, touched, values, isSubmitting, handleChange, handleBlur, setValues }) => (
         <Modal onClose={handleOpenProductForm}>
           <div className={styles.container}>
             <h2 className={styles.formTitile}>{`${isEdit ? 'EDIT' : 'ADD'} YOUR  PRODUCT`}</h2>
@@ -81,6 +81,9 @@ function AddProductForm({ origins }) {
                 </Field>
                 {errors.origin && touched.origin ? <div className={styles.errorText}>{errors.origin}</div> : null}
               </label>
+              <Button actionType="button" disabled={isSubmitting} onClick={() => setValues(initialState)}>
+                Сancel changes
+              </Button>
               <Button actionType="submit" type="submit" disabled={isSubmitting}>
                 Submit
               </Button>

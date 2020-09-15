@@ -41,7 +41,7 @@ export default function Button({ onClick, actionType, type, children, disabled, 
 
 Button.propTypes = {
   onClick: propTypes.func,
-  type: propTypes.oneOf(['submit', 'cancel']),
+  type: propTypes.oneOf(['submit', 'cancel', 'edit']),
   disabled: propTypes.bool,
 };
 
