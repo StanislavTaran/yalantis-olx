@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useResetFilters from '../../hooks/useResetFilters';
 import { fetchAllProducts, fetchOwnProducts } from '../../redux/products/productsOperations';
 import { setPage } from '../../redux/filters/filtersActions';
 import { getFilters, getPerPage, getCurrentPage } from '../../redux/filters/filtersSelectors';
@@ -12,6 +13,8 @@ import scrollUp from '../../helpers/scrollUp';
 import styles from './HomePage.module.css';
 
 export default function HomePage({ ownProducts = false }) {
+  useResetFilters();
+
   const dispatch = useDispatch();
   const params = useSelector(getFilters);
   const fetchProducts = useCallback(() => dispatch(fetchAllProducts(mapFiltersToParams(params))), [dispatch, params]);

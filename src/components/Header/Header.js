@@ -29,14 +29,18 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <Link to={routes.INDEX.INDEX} className={styles.link}>
+      <Link to={{ pathname: routes.INDEX.INDEX, state: { resetFilters: true } }} className={styles.link}>
         <h1 className={styles.logo}>YOLX</h1>
       </Link>
 
       <div className={styles.wrap}>
         {pathname !== routes.CART.INDEX ? (
           <>
-            <NavLink className={styles.link} activeClassName={styles.activeLink} to={routes.OWN_PRODUCTS.INDEX}>
+            <NavLink
+              className={styles.link}
+              activeClassName={styles.activeLink}
+              to={{ pathname: routes.OWN_PRODUCTS.INDEX, state: { resetFilters: true } }}
+            >
               My Products
             </NavLink>
             <CircleButton onClick={handleOpenProductForm}>
