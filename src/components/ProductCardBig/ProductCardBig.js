@@ -10,6 +10,7 @@ import BaseProductInfo from '../BaseProductInfo/BaseProductInfo';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsIdInCart, getCart } from '../../redux/cart/cartSelectors';
+import { getIsOwnProduct } from '../../redux/products/productsSelectors';
 import {
   addProductToCart,
   removeProductFromCart,
@@ -41,7 +42,7 @@ export default function ProductCardBig({ product, withCountButtons, children }) 
     dispatch(showProductForm(true));
   };
 
-  const isOwnProduct = !!product.isEditable;
+  const isOwnProduct = useSelector(getIsOwnProduct(product.id));
 
   return (
     <div className={styles.container}>

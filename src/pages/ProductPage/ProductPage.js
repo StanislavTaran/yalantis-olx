@@ -1,8 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductPageCard from '../../components/ProductPageCard/ProductPageCard';
 import { fetchOneProduct } from '../../redux/products/productsOperations';
+import { getCurrentProduct } from '../../redux/products/productsSelectors';
 
 export default function ProductPage() {
   const { productId } = useParams();
@@ -14,9 +15,10 @@ export default function ProductPage() {
     fetchCurrentProduct();
   }, [fetchCurrentProduct]);
 
+  const product = useSelector(getCurrentProduct);
   return (
     <section>
-      <ProductPageCard />
+      <ProductPageCard product={product} />
     </section>
   );
 }
