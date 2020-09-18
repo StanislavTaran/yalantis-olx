@@ -12,6 +12,7 @@ import routes from '../../constants/routes';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsIdInCart } from '../../redux/cart/cartSelectors';
+import { getIsOwnProduct } from '../../redux/products/productsSelectors';
 import { addProductToCart, removeProductFromCart } from '../../redux/cart/cartOperatins';
 import { showProductForm } from '../../redux/app/appActions';
 import { setEditedProduct } from '../../redux/products/productsActions';
@@ -29,7 +30,7 @@ export default function ProductItem({ product }) {
     dispatch(showProductForm(true));
   };
 
-  const isOwnProduct = product.isEditable;
+  const isOwnProduct = useSelector(getIsOwnProduct(product));
 
   return (
     <li className={styles.container}>
