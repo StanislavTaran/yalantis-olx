@@ -10,11 +10,4 @@ export const getTotalQuantity = state => state.products.totalProducts;
 
 export const getEditedProduct = state => state.products.editedProduct;
 
-export const getIsOwnProduct = product =>
-  createSelector([getProducts], products => {
-    if (products && products.length) {
-      const foundProduct = products.find(productItem => productItem.id === product.id);
-      return foundProduct && foundProduct.isEditable;
-    }
-    return product.isEditable;
-  });
+export const getIsOwnProduct = product => () => product.isEditable;
