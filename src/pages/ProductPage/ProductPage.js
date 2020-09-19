@@ -16,5 +16,6 @@ export default function ProductPage() {
   }, [fetchCurrentProduct]);
 
   const product = useSelector(getCurrentProduct);
+
   return <section>{Object.keys(product).length && <ProductPageCard product={product} />}</section>;
 }

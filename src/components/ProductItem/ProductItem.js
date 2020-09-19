@@ -30,7 +30,7 @@ export default function ProductItem({ product }) {
     dispatch(showProductForm(true));
   };
 
-  const isOwnProduct = useSelector(getIsOwnProduct(product));
+  const isOwnProduct = useSelector(getIsOwnProduct(product.id));
 
   return (
     <li className={styles.container}>
