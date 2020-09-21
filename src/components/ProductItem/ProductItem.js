@@ -30,19 +30,25 @@ export default function ProductItem({ product }) {
     dispatch(showProductForm(true));
   };
 
-  const isOwnProduct = useSelector(getIsOwnProduct(product.id));
+  const isOwnProduct = useSelector(getIsOwnProduct(product));
 
   return (
     <li className={styles.container}>
       <Link to={routes.PRODUCT.createPath(product.id)} className={styles.link}>
         <BaseProductInfo product={product} />
       </Link>
-      {isOwnProduct && (
-        <div className={styles.icon}>
-          <img src={briefcase} alt="own product" />
-        </div>
-      )}
-      {!isOwnProduct ? (
+
+      {isOwnProduct ? (
+        <>
+          <div className={styles.icon}>
+            <img src={briefcase} alt="own product" />
+          </div>
+
+          <Button type="edit" onClick={handleEditProduct} className={styles.editButton}>
+            Edit Product
+          </Button>
+        </>
+      ) : (
         <div>
           {isInCart ? (
             <Button onClick={handleRemoveProductFromCart}>Remove from cart</Button>
@@ -52,10 +58,6 @@ export default function ProductItem({ product }) {
             </Button>
           )}
         </div>
-      ) : (
-        <Button type="edit" onClick={handleEditProduct} className={styles.editButton}>
-          Edit Product
-        </Button>
       )}
     </li>
   );

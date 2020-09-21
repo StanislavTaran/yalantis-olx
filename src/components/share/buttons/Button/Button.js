@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import buttonTypes from '../../../../constants/buttonTypes';
 import styles from './Button.module.css';
 
 const mapStyle = (type, disabled) => {
@@ -41,7 +42,7 @@ export default function Button({ onClick, actionType, type, children, disabled, 
 
 Button.propTypes = {
   onClick: propTypes.func,
-  type: propTypes.oneOf(['submit', 'cancel', 'edit']),
+  type: propTypes.oneOf(Object.values(buttonTypes)),
   disabled: propTypes.bool,
 };
 

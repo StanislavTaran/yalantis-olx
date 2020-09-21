@@ -10,14 +10,14 @@ const errors = createReducer(
   },
 );
 
-const token = createReducer(
+const user = createReducer(
   {},
   {
-    [logInSucces]: (state, action) => action.payload.token,
+    [logInSucces]: (state, action) => action.payload.email,
   },
 );
 
 export default combineReducers({
   errors,
-  token,
+  user,
 });

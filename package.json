@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "debounce": "^1.2.0",
+    "dotenv": "^8.2.0",
     "formik": "^2.1.5",
     "moment": "^2.27.0",
     "prettier": "^2.0.5",

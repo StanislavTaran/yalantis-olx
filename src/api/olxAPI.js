@@ -2,9 +2,9 @@ import axios from 'axios';
 import qs from 'qs';
 import API_URLs from '../constants/olxAPI';
 
-const token = localStorage.getItem('token');
+const { REACT_APP_API_TOKEN } = process.env;
 
-axios.defaults.headers.common['Authorization'] = token;
+axios.defaults.headers.common['Authorization'] = REACT_APP_API_TOKEN;
 axios.defaults.baseURL = API_URLs.BASE_URL.INDEX;
 axios.defaults.params = {};
 

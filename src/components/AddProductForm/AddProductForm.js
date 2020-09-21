@@ -39,7 +39,7 @@ function AddProductForm({ origins }) {
         handleSubmit(editedProduct.id, values);
       }}
     >
-      {({ errors, touched, values, isSubmitting, handleChange, handleBlur, setValues }) => (
+      {({ errors, touched, values, isSubmitting, handleChange, handleBlur, handleReset }) => (
         <Modal onClose={handleOpenProductForm}>
           <div className={styles.container}>
             <h2 className={styles.formTitile}>{`${isEdit ? 'EDIT' : 'ADD'} YOUR  PRODUCT`}</h2>
@@ -81,7 +81,7 @@ function AddProductForm({ origins }) {
                 </Field>
                 {errors.origin && touched.origin ? <div className={styles.errorText}>{errors.origin}</div> : null}
               </label>
-              <Button actionType="button" disabled={isSubmitting} onClick={() => setValues(initialState)}>
+              <Button actionType="button" disabled={isSubmitting} onClick={handleReset}>
                 Сancel changes
               </Button>
               <Button actionType="submit" type="submit" disabled={isSubmitting}>
