@@ -1,28 +1,35 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAuth } from '../../hooks/auth/useAuth';
 import { fetchOrigins } from '../../redux/products/productsOperations';
-
 import { useSelector } from 'react-redux';
 import PagesRouter from '../../routes/PagesRouter';
 import Header from '../Header/Header';
-import Loader from '../Loader/Loader';
-import { getIsLoading } from '../../redux/app/appSelectors';
+import AddProductForm from '../AddProductForm/AddProductForm';
+import { getIsShowProductForm } from '../../redux/app/appSelectors';
+import { getOrigins } from '../../redux/products/productsSelectors';
 
 import styles from './App.module.css';
 
 export default function App() {
+  const { authAsync } = useAuth();
   const dispatch = useDispatch();
-  const getOrigins = useCallback(() => dispatch(fetchOrigins()), [dispatch]);
+  const getProductsOrigins = useCallback(() => dispatch(fetchOrigins()), [dispatch]);
+
+  const isShowProductForm = useSelector(getIsShowProductForm);
 
   useEffect(() => {
-    getOrigins();
-  }, [getOrigins]);
+    getProductsOrigins();
+    authAsync();
+  }, [getProductsOrigins, authAsync]);
 
-  const isLoading = useSelector(getIsLoading);
+  const origins = useSelector(getOrigins);
+
   return (
     <div className={styles.main}>
       <Header />
-      {isLoading && <Loader />}
+      {isShowProductForm && <AddProductForm origins={origins} />}
+
       <PagesRouter />
     </div>
   );

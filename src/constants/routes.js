@@ -2,6 +2,9 @@ export default {
   INDEX: {
     INDEX: '/',
   },
+  OWN_PRODUCTS: {
+    INDEX: '/products/own',
+  },
 
   CART: {
     INDEX: '/cart',

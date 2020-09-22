@@ -3,7 +3,6 @@
   margin: 10px auto;
   padding: 0 5px;
   border: none;
-  border-radius: 8px;
   min-width: 200px;
   height: 50px;
   text-align: center;
@@ -25,4 +24,14 @@
 .buttonCancel {
   composes: button;
   background-color: var(--third-main-color);
+}
+
+.buttonEdit {
+  composes: button;
+  background-color: var(--second-main-color);
+}
+
+.buttonDisabled {
+  composes: button;
+  background-color: rgb(126, 125, 125);
 }

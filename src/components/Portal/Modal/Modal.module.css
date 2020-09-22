@@ -1,0 +1,49 @@
+.container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  z-index: 99;
+  width: 100%;
+  background-color: rgba(204, 204, 204, 0.9);
+}
+.overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.closePortalButton {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 32px;
+  height: 32px;
+  opacity: 0.6;
+  background-color: var(--first-main-color);
+  border: none;
+}
+.closePortalButton:hover {
+  opacity: 1;
+}
+.closePortalButton:before,
+.closePortalButton:after {
+  position: absolute;
+  left: 15px;
+  top: 9px;
+  content: ' ';
+  height: 15px;
+  width: 2px;
+  background-color: #333;
+}
+.closePortalButton:before {
+  transform: rotate(45deg);
+}
+.closePortalButton:after {
+  transform: rotate(-45deg);
+}

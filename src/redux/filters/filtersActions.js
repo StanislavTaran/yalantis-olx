@@ -12,3 +12,6 @@ export const setPage = createAction('filters/SET_PAGE');
 
 // PER PAGE
 export const setPerPage = createAction('filters/SET_PER_PAGE');
+
+// RESET
+export const resetFilters = createAction('filters/RESET');
