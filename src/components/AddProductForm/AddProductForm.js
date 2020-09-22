@@ -9,6 +9,7 @@ import { getIsShowProductForm } from '../../redux/app/appSelectors';
 import { showProductForm } from '../../redux/app/appActions';
 import { getEditedProduct } from '../../redux/products/productsSelectors';
 import { postProduct, patchProduct } from '../../redux/products/productsOperations';
+import { postProductRequest, patchProductRequest } from '../../redux/products/productsActions';
 import addProductSchema from '../../helpers/schemas/addProductSchema';
 import styles from './AddProductForm.module.css';
 
@@ -22,7 +23,7 @@ function AddProductForm({ origins }) {
   const handleOpenProductForm = () => dispatch(showProductForm(!isShowProductForm));
 
   const handleSubmit = (id, values) => {
-    isEdit ? dispatch(patchProduct(id, values)) : dispatch(postProduct(values));
+    isEdit ? dispatch(patchProduct(id, values)) : dispatch(postProductRequest(values));
   };
 
   const initialState = {
