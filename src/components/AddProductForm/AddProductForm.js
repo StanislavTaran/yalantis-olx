@@ -8,9 +8,10 @@ import Modal from '../Portal/Modal/Modal';
 import { getIsShowProductForm } from '../../redux/app/appSelectors';
 import { showProductForm } from '../../redux/app/appActions';
 import { getEditedProduct } from '../../redux/products/productsSelectors';
-import { postProduct, patchProduct } from '../../redux/products/productsOperations';
 import { postProductRequest, patchProductRequest } from '../../redux/products/productsActions';
 import addProductSchema from '../../helpers/schemas/addProductSchema';
+import { productsOrigins } from '../../constants/productsFilters';
+
 import styles from './AddProductForm.module.css';
 
 function AddProductForm({ origins }) {
@@ -22,14 +23,14 @@ function AddProductForm({ origins }) {
   const isShowProductForm = useSelector(getIsShowProductForm);
   const handleOpenProductForm = () => dispatch(showProductForm(!isShowProductForm));
 
-  const handleSubmit = (id, values) => {
-    isEdit ? dispatch(patchProduct(id, values)) : dispatch(postProductRequest(values));
+  const handleSubmit = (productId, values) => {
+    isEdit ? dispatch(patchProductRequest({ productId, values })) : dispatch(postProductRequest(values));
   };
 
   const initialState = {
     name: isEdit ? editedProduct.name : '',
     price: isEdit ? editedProduct.price : 0,
-    origin: isEdit ? editedProduct.origin : '',
+    origin: isEdit ? editedProduct.origin : productsOrigins[0],
   };
 
   return (

@@ -6,8 +6,6 @@ import storage from 'redux-persist/lib/storage';
 import rootSaga from './rootSaga';
 import createSagaMiddleware from 'redux-saga';
 
-import ReduxThunk from 'redux-thunk';
-
 import products from './products/productsReducer';
 import app from './app/appReducer';
 import cart from './cart/cartReducer';
@@ -21,7 +19,7 @@ const persistConfig = {
   storage,
 };
 
-const middlewares = [sagaMiddleware, ReduxThunk];
+const middlewares = [sagaMiddleware];
 
 const rootReducer = combineReducers({
   app,

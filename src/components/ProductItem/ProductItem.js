@@ -13,7 +13,7 @@ import routes from '../../constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsIdInCart } from '../../redux/cart/cartSelectors';
 import { getIsOwnProduct } from '../../redux/products/productsSelectors';
-import { addProductToCart, removeProductFromCart } from '../../redux/cart/cartOperatins';
+import { addToCart, removeFromCart } from '../../redux/cart/cartActions';
 import { showProductForm } from '../../redux/app/appActions';
 import { setEditedProduct } from '../../redux/products/productsActions';
 
@@ -23,8 +23,8 @@ export default function ProductItem({ product }) {
 
   const isInCart = isAlreadyInCart(product.id, productsInCart);
 
-  const handleRemoveProductFromCart = () => dispatch(removeProductFromCart(product.id));
-  const handleAddProductToCart = () => dispatch(addProductToCart(product));
+  const handleRemoveProductFromCart = () => dispatch(removeFromCart(product.id));
+  const handleAddProductToCart = () => dispatch(addToCart(product));
   const handleEditProduct = () => {
     dispatch(setEditedProduct(product));
     dispatch(showProductForm(true));

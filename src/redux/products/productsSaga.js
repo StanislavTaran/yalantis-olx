@@ -1,17 +1,17 @@
-import { put, call, takeEvery, take, select } from 'redux-saga/effects';
+import { put, call, takeEvery, take, fork, select, debounce } from 'redux-saga/effects';
 import * as productsActions from '../products/productsActions';
 import * as appActions from '../app/appActions';
 import { getFilters } from '../filters/filtersSelectors';
 import { mapFiltersToParams } from '../../helpers/mapFiltersToParams';
 import * as olxAPI from '../../api/olxAPI';
-
 import { toastr } from 'react-redux-toastr';
 import { SUCCES, ERRORS } from '../../constants/notifications';
 
 export function* fetchAllProducts() {
   try {
-    const params = yield select(getFilters);
-    const res = yield call(olxAPI.fetchProducts, mapFiltersToParams(params));
+    const filters = yield select(getFilters);
+    const params = mapFiltersToParams(filters);
+    const res = yield call(olxAPI.fetchProducts, params);
 
     yield put(productsActions.getProductsSucces(res.data));
   } catch (e) {
@@ -30,16 +30,6 @@ export function* fetchOwnProducts() {
   }
 }
 
-export function* fetchOneProduct() {
-  try {
-    const { payload: productId } = yield take(productsActions.getCurrentProductRequest);
-    const res = yield call(olxAPI.fetchOneProduct, productId);
-    yield put(productsActions.getCurrentProductSucces(res.data));
-  } catch (e) {
-    yield put(productsActions.getCurrentProductError(e));
-  }
-}
-
 export function* getOrigins() {
   try {
     const res = yield call(olxAPI.fetchOrigins);
@@ -48,30 +38,62 @@ export function* getOrigins() {
     yield put(productsActions.getOriginsError(e));
   }
 }
-// can exist problem take/takeEvery takeEvery=> take -- 2 action for success
+
+export function* fetchOneProduct() {
+  while (true) {
+    try {
+      const { payload: productId } = yield take(productsActions.getCurrentProductRequest);
+      const res = yield call(olxAPI.fetchOneProduct, productId);
+      yield put(productsActions.getCurrentProductSucces(res.data));
+    } catch (e) {
+      yield put(productsActions.getCurrentProductError(e));
+    }
+  }
+}
+
 export function* postProduct() {
-  try {
-    const { payload: data } = yield take(productsActions.postProductRequest);
-    const res = yield call(olxAPI.postProduct, data);
-    yield put(productsActions.postProductSucces(res.data));
-    yield call(toastr.success(SUCCES.INDEX, SUCCES.PRODUCT.ADD_PRODUCT));
-  } catch (e) {
-    yield put(productsActions.postProductError(e));
-    yield call(toastr.error(ERRORS.INDEX, ERRORS.UNKNOWN_ERROR));
-  } finally {
-    yield put(appActions.showProductForm(false));
+  while (true) {
+    try {
+      const { payload: data } = yield take(productsActions.postProductRequest);
+      const res = yield call(olxAPI.postProduct, data);
+      yield put(productsActions.postProductSucces(res.data));
+      toastr.success(SUCCES.INDEX, SUCCES.PRODUCT.ADD_PRODUCT);
+    } catch (e) {
+      yield put(productsActions.postProductError(e));
+      toastr.error(ERRORS.INDEX, ERRORS.UNKNOWN_ERROR);
+    } finally {
+      yield put(appActions.showProductForm(false));
+    }
+  }
+}
+
+export function* patchProduct() {
+  while (true) {
+    try {
+      const {
+        payload: { productId, values },
+      } = yield take(productsActions.patchProductRequest);
+      const res = yield call(olxAPI.patchProduct, { productId, values });
+      yield put(productsActions.patchProductSucces(res.data));
+      toastr.success(SUCCES.INDEX, SUCCES.PRODUCT.PATCH_PRODUCT);
+    } catch (e) {
+      yield put(productsActions.patchProductError(e));
+      toastr.error(ERRORS.INDEX, ERRORS.UNKNOWN_ERROR);
+    } finally {
+      yield put(appActions.showProductForm(false));
+    }
   }
 }
 
 export function* watchProducts() {
   yield takeEvery(productsActions.getOriginsRequest, getOrigins);
-  yield takeEvery(productsActions.getOwnProductsRequest, fetchOwnProducts);
-  yield takeEvery(productsActions.getProductsRequest, fetchAllProducts);
-  yield takeEvery(productsActions.getCurrentProductRequest, fetchOneProduct);
+  yield debounce(1000, productsActions.getOwnProductsRequest, fetchOwnProducts);
+  yield debounce(1000, productsActions.getProductsRequest, fetchAllProducts);
 }
 
-//
-// export default function* root {
-//   yield fork(watcher1);
-//   yield fork(watcher2);
-// }
+export function* watchProductsMain() {
+  yield fork(watchProducts);
+  yield fork(fetchOneProduct);
+  yield fork(postProduct);
+  yield fork(patchProduct);
+}

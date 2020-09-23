@@ -12,11 +12,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProductsIdInCart, getCart } from '../../redux/cart/cartSelectors';
 import { getIsOwnProduct } from '../../redux/products/productsSelectors';
 import {
-  addProductToCart,
-  removeProductFromCart,
-  incrementQuantity,
-  decrementQuantity,
-} from '../../redux/cart/cartOperatins';
+  addToCart,
+  removeFromCart,
+  decrementProductQuantity,
+  incrementProductQuantity,
+} from '../../redux/cart/cartActions';
 import { setEditedProduct } from '../../redux/products/productsActions';
 import { showProductForm } from '../../redux/app/appActions';
 
@@ -32,10 +32,10 @@ export default function ProductCardBig({ product, withCountButtons, children }) 
   const isInCart = isAlreadyInCart(product.id, productsInCart);
   const quantity = (cart[product.id] && cart[product.id].quantity) || 0;
 
-  const handleProductIncrement = () => dispatch(incrementQuantity(product.id));
-  const handleProductDecrement = () => dispatch(decrementQuantity(product.id));
-  const handleAddProductToCart = () => dispatch(addProductToCart(product));
-  const handleRemoveProductFromCart = () => dispatch(removeProductFromCart(product.id));
+  const handleProductIncrement = () => dispatch(incrementProductQuantity(product.id));
+  const handleProductDecrement = () => dispatch(decrementProductQuantity(product.id));
+  const handleAddProductToCart = () => dispatch(addToCart(product));
+  const handleRemoveProductFromCart = () => dispatch(removeFromCart(product.id));
 
   const handleEditClick = () => {
     dispatch(setEditedProduct(product));
