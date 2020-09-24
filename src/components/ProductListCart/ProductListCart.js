@@ -1,20 +1,16 @@
 import React from 'react';
-import ProductCardBig from '../ProductCardBig/ProductCardBig';
-import Button from '../share/buttons/Button/Button';
+import propTypes from 'prop-types';
 import styles from './ProductListCart.module.css';
+import ProductCardBigContainer from '../ProductCardBig/ProductCardBigContainer';
+import Button from '../share/buttons/Button/Button';
 
-import { getProductsInCart, getTotalPrice } from '../../redux/cart/cartSelectors';
-import { useSelector } from 'react-redux';
-
-export default function ProductListCart() {
-  const products = useSelector(getProductsInCart);
-  const totalPrice = useSelector(getTotalPrice);
+export default function ProductListCart({ products, totalPrice }) {
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
         {products.map(item => (
           <li className={styles.item} key={item.id}>
-            <ProductCardBig product={item} withCountButtons />
+            <ProductCardBigContainer product={item} withCountButtons />
           </li>
         ))}
       </ul>
@@ -26,3 +22,16 @@ export default function ProductListCart() {
     </div>
   );
 }
+
+ProductListCart.propTypes = {
+  products: propTypes.arrayOf(
+    propTypes.shape({
+      name: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      origin: propTypes.string.isRequired,
+      createdAt: propTypes.string.isRequired,
+      updatedAt: propTypes.string.isRequired,
+    }),
+  ),
+  totalPrice: propTypes.number.isRequired,
+};

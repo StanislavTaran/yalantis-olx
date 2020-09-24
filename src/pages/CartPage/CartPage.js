@@ -1,9 +1,9 @@
 import React from 'react';
-import ProductListCart from '../../components/ProductListCart/ProductListCart';
+import ProductListCartContainer from '../../components/ProductListCart/ProductListCartContainer';
 export default function CartPage() {
   return (
     <section>
-      <ProductListCart />
+      <ProductListCartContainer />
     </section>
   );
 }

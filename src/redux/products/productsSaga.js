@@ -1,30 +1,36 @@
-import { put, call, takeEvery, take, fork, select, debounce } from 'redux-saga/effects';
+import { put, call, takeEvery, takeLatest, take, fork, select, delay } from 'redux-saga/effects';
 import * as productsActions from '../products/productsActions';
 import * as appActions from '../app/appActions';
 import { getFilters } from '../filters/filtersSelectors';
 import { mapFiltersToParams } from '../../helpers/mapFiltersToParams';
+import { pushToUrl } from '../../helpers/history/URLHelpers';
 import * as olxAPI from '../../api/olxAPI';
 import { toastr } from 'react-redux-toastr';
 import { SUCCES, ERRORS } from '../../constants/notifications';
 
 export function* fetchAllProducts() {
-  try {
-    const filters = yield select(getFilters);
-    const params = mapFiltersToParams(filters);
-    const res = yield call(olxAPI.fetchProducts, params);
+  const filters = yield select(getFilters);
+  const params = mapFiltersToParams(filters);
+  yield delay(1000);
 
+  try {
+    const res = yield call(olxAPI.fetchProducts, params);
     yield put(productsActions.getProductsSucces(res.data));
+    yield call(pushToUrl, params);
   } catch (e) {
     yield put(productsActions.getProductsError(e));
   }
 }
 
 export function* fetchOwnProducts() {
-  try {
-    const params = yield select(getFilters);
-    const res = yield call(olxAPI.fetchOwnProducts, mapFiltersToParams(params));
+  const filters = yield select(getFilters);
+  const params = mapFiltersToParams(filters);
+  yield delay(1000);
 
+  try {
+    const res = yield call(olxAPI.fetchOwnProducts, params);
     yield put(productsActions.getOwnProductsSucces(res.data));
+    yield call(pushToUrl, params);
   } catch (e) {
     yield put(productsActions.getOwnProductsError(e));
   }
@@ -87,8 +93,8 @@ export function* patchProduct() {
 
 export function* watchProducts() {
   yield takeEvery(productsActions.getOriginsRequest, getOrigins);
-  yield debounce(1000, productsActions.getOwnProductsRequest, fetchOwnProducts);
-  yield debounce(1000, productsActions.getProductsRequest, fetchAllProducts);
+  yield takeLatest(productsActions.getOwnProductsRequest, fetchOwnProducts);
+  yield takeLatest(productsActions.getProductsRequest, fetchAllProducts);
 }
 
 export function* watchProductsMain() {

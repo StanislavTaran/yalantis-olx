@@ -1,18 +1,27 @@
 import React from 'react';
-import ProductItem from '../ProductItem/ProductItem';
-import { useSelector } from 'react-redux';
-import { getProducts } from '../../redux/products/productsSelectors';
+import propTypes from 'prop-types';
 import styles from './ProductsList.module.css';
+import ProductItemContainer from '../ProductItem/ProductItemContainer';
 
-export default function ProductsList() {
-  const products = useSelector(getProducts);
+export default function ProductsList({ products }) {
   return (
     <div className={styles.container}>
       <ul className={styles.productList}>
         {products.map(item => (
-          <ProductItem key={item.id} product={item} />
+          <ProductItemContainer key={item.id} product={item} />
         ))}
       </ul>
     </div>
   );
 }
+ProductsList.propTypes = {
+  products: propTypes.arrayOf(
+    propTypes.shape({
+      name: propTypes.string.isRequired,
+      price: propTypes.number.isRequired,
+      origin: propTypes.string.isRequired,
+      createdAt: propTypes.string.isRequired,
+      updatedAt: propTypes.string.isRequired,
+    }),
+  ),
+};

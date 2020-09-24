@@ -1,45 +1,26 @@
-import React, { useCallback, useState } from 'react';
-import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import SidePortal from '../Portal/SidePortal/SidePortal';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { getFilteredOrigins } from '../../redux/filters/filtersSelectors';
-import { setOrigins, setPrice, setPerPage } from '../../redux/filters/filtersActions';
-
-import { getOrigins } from '../../redux/products/productsSelectors';
-import { getIsShowFilters } from '../../redux/app/appSelectors';
-import { showFilters } from '../../redux/app/appActions';
-
-import Select from '../share/inputs/Select/Select';
-import CircleButton from '../share/buttons/CircleButton/CircleButton';
-import CheckboxGroup from '../share/inputs/CheckboxGroup/CheckboxGroup';
-
-import { productsPerPage, productsPriceRange } from '../../constants/productsFilters';
-
+import React from 'react';
+import propTypes from 'prop-types';
 import styles from './FilterForm.module.css';
+import SidePortal from '../Portal/SidePortal/SidePortal';
+import Select from '../share/inputs/Select/Select';
+import CheckboxGroup from '../share/inputs/CheckboxGroup/CheckboxGroup';
+import { Range } from 'rc-slider';
+import CircleButton from '../share/buttons/CircleButton/CircleButton';
 import filtersIcon from '../../images/filters.svg';
 
-export default function FilterForm() {
-  const [priceLocal, setPriceLocal] = useState(productsPriceRange);
-  const handleSetPriceLocal = value => setPriceLocal(value);
-
-  const origins = useSelector(getOrigins);
-  const filteredOrigins = useSelector(getFilteredOrigins);
-
-  const dispatch = useDispatch();
-
-  const handleSetOrigins = item => {
-    return dispatch(setOrigins(item));
-  };
-
-  const handleSetPrice = useCallback(() => dispatch(setPrice(priceLocal)), [dispatch, priceLocal]);
-
-  const handleSetQuantityProductsOnPage = e => dispatch(setPerPage(e.target.value));
-
-  const isShowFilters = useSelector(getIsShowFilters);
-  const handleShowFilters = () => dispatch(showFilters(!isShowFilters));
-
+export default function FilterForm({
+  isShowFilters,
+  handleShowFilters,
+  handleSetOrigins,
+  handleSetQuantityProductsOnPage,
+  origins,
+  filteredOrigins,
+  handleSetPriceLocal,
+  handleSetPrice,
+  priceLocal,
+  productsPerPageOptions,
+  productsPriceRangeOptions,
+}) {
   return (
     <aside className={styles.container}>
       {isShowFilters ? (
@@ -48,7 +29,7 @@ export default function FilterForm() {
             <form id="filterForm">
               <div>
                 <span>Products on page </span>
-                <Select options={productsPerPage} onChange={handleSetQuantityProductsOnPage} />
+                <Select options={productsPerPageOptions} onChange={handleSetQuantityProductsOnPage} />
 
                 <fieldset>
                   <legend>Choise by region</legend>
@@ -63,8 +44,8 @@ export default function FilterForm() {
                   </span>
                   <Range
                     className="price-filter-range"
-                    min={productsPriceRange[0]}
-                    max={productsPriceRange[1]}
+                    min={productsPriceRangeOptions[0]}
+                    max={productsPriceRangeOptions[1]}
                     value={priceLocal}
                     allowCross={false}
                     pushable={100}
@@ -84,3 +65,17 @@ export default function FilterForm() {
     </aside>
   );
 }
+
+FilterForm.propTypes = {
+  isShowFilters: propTypes.bool.isRequired,
+  handleShowFilters: propTypes.func.isRequired,
+  handleSetQuantityProductsOnPage: propTypes.func.isRequired,
+  handleSetOrigins: propTypes.func.isRequired,
+  origins: propTypes.arrayOf(propTypes.string).isRequired,
+  filteredOrigins: propTypes.arrayOf(propTypes.string).isRequired,
+  handleSetPrice: propTypes.func.isRequired,
+  handleSetPriceLocal: propTypes.func.isRequired,
+  priceLocal: propTypes.arrayOf(propTypes.number).isRequired,
+  productsPerPageOptions: propTypes.arrayOf(propTypes.number).isRequired,
+  productsPriceRangeOptions: propTypes.arrayOf(propTypes.number).isRequired,
+};
