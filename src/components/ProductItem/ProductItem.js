@@ -51,9 +51,9 @@ ProductItemContainer.propTypes = {
   product: propTypes.shape({
     id: propTypes.string.isRequired,
   }),
-  isInCart: propTypes.bool.isRequired,
-  isOwnProduct: propTypes.bool.isRequired,
-  handleRemoveProductFromCart: propTypes.func.isRequired,
-  handleAddProductToCart: propTypes.func.isRequired,
-  handleEditProduct: propTypes.func.isRequired,
+  isInCart: propTypes.bool,
+  isOwnProduct: propTypes.bool,
+  handleRemoveProductFromCart: propTypes.func,
+  handleAddProductToCart: propTypes.func,
+  handleEditProduct: propTypes.func,
 };

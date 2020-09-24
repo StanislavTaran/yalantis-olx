@@ -71,7 +71,12 @@ FilterForm.propTypes = {
   handleShowFilters: propTypes.func.isRequired,
   handleSetQuantityProductsOnPage: propTypes.func.isRequired,
   handleSetOrigins: propTypes.func.isRequired,
-  origins: propTypes.arrayOf(propTypes.string).isRequired,
+  origins: propTypes.arrayOf(
+    propTypes.shape({
+      value: propTypes.string.isRequired,
+      displayName: propTypes.string.isRequired,
+    }),
+  ).isRequired,
   filteredOrigins: propTypes.arrayOf(propTypes.string).isRequired,
   handleSetPrice: propTypes.func.isRequired,
   handleSetPriceLocal: propTypes.func.isRequired,

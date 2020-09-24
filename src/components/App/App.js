@@ -17,5 +17,10 @@ export default function App({ isShowProductForm, origins }) {
 
 App.propTypes = {
   isShowProductForm: propTypes.bool.isRequired,
-  origins: propTypes.arrayOf(propTypes.string).isRequired,
+  origins: propTypes.arrayOf(
+    propTypes.shape({
+      value: propTypes.string.isRequired,
+      displayName: propTypes.string.isRequired,
+    }),
+  ).isRequired,
 };

@@ -31,11 +31,11 @@ export default function ProductCardBig({
             {isInCart ? (
               <>
                 {withCountButtons ? (
-                  <p>
+                  <div>
                     Quantity in cart : <CountButton onClick={handleProductDecrement}>-</CountButton> {quantity}{' '}
                     <CountButton onClick={handleProductIncrement}>+</CountButton>
                     <SimpleLabel text={`Price for ${quantity} units : ${totalPrice}`} />
-                  </p>
+                  </div>
                 ) : null}
 
                 <Button onClick={handleRemoveProductFromCart}>Remove from cart</Button>
@@ -68,7 +68,7 @@ ProductCardBig.propTypes = {
   handleAddProductToCart: propTypes.func.isRequired,
   handleRemoveProductFromCart: propTypes.func.isRequired,
   handleEditClick: propTypes.func.isRequired,
-  totalPrice: propTypes.number.isRequired,
+  totalPrice: propTypes.string,
 };
 
 ProductCardBig.defaultProps = {

@@ -47,5 +47,5 @@ Header.propTypes = {
   pathname: propTypes.string.isRequired,
   handleOpenProductForm: propTypes.func.isRequired,
   totalQuantity: propTypes.number.isRequired,
-  totalprice: propTypes.number.isRequired,
+  totalPrice: propTypes.number.isRequired,
 };
