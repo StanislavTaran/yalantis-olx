@@ -4,7 +4,7 @@ import useResetFilters from '../../hooks/useResetFilters';
 import { useGetFiltersFromURL } from '../../hooks/useGetFiltersFromURL';
 import { getProductsRequest, getOwnProductsRequest } from '../../redux/products/productsActions';
 import { setPage, setEditable } from '../../redux/filters/filtersActions';
-import { getPerPage, getCurrentPage, getFilters } from '../../redux/filters/filtersSelectors';
+import { getPerPage, getCurrentPage } from '../../redux/filters/filtersSelectors';
 import { getTotalQuantity } from '../../redux/products/productsSelectors';
 import ProductsListContainer from '../../components/ProductsList/ProductsListContainer';
 import Pagination from '../../components/share/Pagination/Pagination';
@@ -17,7 +17,6 @@ export default function ProductsPage({ ownProducts = false }) {
   const { getFiltersFromURL } = useGetFiltersFromURL();
   const { resetFilters } = useResetFilters();
 
-  const filters = useSelector(getFilters);
   const dispatch = useDispatch();
   const fetchProducts = useCallback(() => {
     dispatch(setEditable(false));
@@ -45,7 +44,7 @@ export default function ProductsPage({ ownProducts = false }) {
   useEffect(() => {
     ownProducts ? fetchMyProducts() : fetchProducts();
     return resetFilters();
-  }, [fetchProducts, fetchMyProducts, ownProducts, filters, resetFilters]);
+  }, [fetchProducts, fetchMyProducts, ownProducts, resetFilters]);
 
   return (
     <>
