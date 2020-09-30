@@ -10,7 +10,9 @@ const useResetFilters = () => {
     return history.listen(location => {
       const { state } = location;
 
-      state && state.resetFilters && dispatch(filtersActions.resetFilters());
+      if (state && state.resetFilters) {
+        dispatch(filtersActions.resetFilters());
+      }
     });
   };
 

@@ -43,7 +43,12 @@ export default function ProductsPage({ ownProducts = false }) {
   }, [getFiltersFromURL]);
 
   useEffect(() => {
-    ownProducts ? fetchMyProducts() : fetchProducts();
+    if (ownProducts) {
+      fetchMyProducts();
+    } else {
+      fetchProducts();
+    }
+
     return resetFilters();
   }, [fetchProducts, fetchMyProducts, ownProducts, filters, resetFilters]);
 

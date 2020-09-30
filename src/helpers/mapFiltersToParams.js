@@ -14,10 +14,12 @@ export const parseFiltersFromUrl = queryString => {
 
   return {
     ...parsedFilters,
-    minPrice: typeof +parsedFilters.minPrice === 'number' ? +parsedFilters.minPrice : productsPriceRange[0],
-    maxPrice: typeof +parsedFilters.maxPrice === 'number' ? +parsedFilters.maxPrice : productsPriceRange[1],
-    perPage: typeof +parsedFilters.perPage === 'number' ? +parsedFilters.perPage : productsPerPage[0],
-    page: typeof +parsedFilters.page === 'number' ? +parsedFilters.page : 1,
+    minPrice:
+      typeof Number(parsedFilters.minPrice) === 'number' ? Number(parsedFilters.minPrice) : productsPriceRange[0],
+    maxPrice:
+      typeof Number(parsedFilters.maxPrice) === 'number' ? Number(parsedFilters.maxPrice) : productsPriceRange[1],
+    perPage: typeof Number(parsedFilters.perPage) === 'number' ? Number(parsedFilters.perPage) : productsPerPage[0],
+    page: typeof Number(parsedFilters.page) === 'number' ? Number(parsedFilters.page) : 1,
     editable: parsedFilters.editable && parsedFilters.editable === 'true' ? true : false,
   };
 };
