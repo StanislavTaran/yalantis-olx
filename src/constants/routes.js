@@ -1,6 +1,6 @@
 export default {
   INDEX: {
-    INDEX: '/',
+    INDEX: '/products',
   },
   OWN_PRODUCTS: {
     INDEX: '/products/own',

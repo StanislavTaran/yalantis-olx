@@ -1,6 +1,6 @@
 import React from 'react';
-import HomePage from '../HomePage/HomePage';
+import ProductsPage from '../ProductsPage/ProductsPage';
 
 export default function OwnProductsPage() {
-  return <HomePage ownProducts={true} />;
+  return <ProductsPage ownProducts={true} />;
 }

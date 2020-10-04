@@ -8,7 +8,7 @@ import ReduxToastr from 'react-redux-toastr';
 import './styles/variables.css';
 import './styles/index.css';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
-import App from './components/App/App';
+import App from './components/App/AppContainer';
 
 ReactDOM.render(
   <Provider store={store}>

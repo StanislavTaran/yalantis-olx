@@ -1,36 +1,26 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAuth } from '../../hooks/auth/useAuth';
-import { fetchOrigins } from '../../redux/products/productsOperations';
-import { useSelector } from 'react-redux';
-import PagesRouter from '../../routes/PagesRouter';
-import Header from '../Header/Header';
-import AddProductForm from '../AddProductForm/AddProductForm';
-import { getIsShowProductForm } from '../../redux/app/appSelectors';
-import { getOrigins } from '../../redux/products/productsSelectors';
-
+import React from 'react';
+import propTypes from 'prop-types';
 import styles from './App.module.css';
+import HeaderContainer from '../Header/HeaderContainer';
+import AddProductFormContainer from '../AddProductForm/AddProductFormContainer';
+import PagesRouter from '../../routes/PagesRouter';
 
-export default function App() {
-  const { authAsync } = useAuth();
-  const dispatch = useDispatch();
-  const getProductsOrigins = useCallback(() => dispatch(fetchOrigins()), [dispatch]);
-
-  const isShowProductForm = useSelector(getIsShowProductForm);
-
-  useEffect(() => {
-    getProductsOrigins();
-    authAsync();
-  }, [getProductsOrigins, authAsync]);
-
-  const origins = useSelector(getOrigins);
-
+export default function App({ isShowProductForm, origins }) {
   return (
     <div className={styles.main}>
-      <Header />
-      {isShowProductForm && <AddProductForm origins={origins} />}
-
+      <HeaderContainer />
+      {isShowProductForm && <AddProductFormContainer origins={origins} />}
       <PagesRouter />
     </div>
   );
 }
+
+App.propTypes = {
+  isShowProductForm: propTypes.bool.isRequired,
+  origins: propTypes.arrayOf(
+    propTypes.shape({
+      value: propTypes.string.isRequired,
+      displayName: propTypes.string.isRequired,
+    }),
+  ).isRequired,
+};

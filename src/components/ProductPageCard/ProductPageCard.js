@@ -1,13 +1,13 @@
 import React from 'react';
 
-import ProductCardBig from '../ProductCardBig/ProductCardBig';
+import ProductCardBigContainer from '../ProductCardBig/ProductCardBigContainer';
 
 export default function ProductPageCard({ product }) {
   return (
     <div>
-      <ProductCardBig product={product}>
+      <ProductCardBigContainer product={product}>
         <p>Additional information will be here later...</p>
-      </ProductCardBig>
+      </ProductCardBigContainer>
     </div>
   );
 }

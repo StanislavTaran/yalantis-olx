@@ -41,12 +41,13 @@ export const postProduct = productData =>
     data: { product: productData },
   });
 
-export const patchProduct = (productId, productData) =>
-  axios({
+export const patchProduct = ({ productId, values }) => {
+  return axios({
     method: 'patch',
     url: API_URLs.PRODUCT.createURL(productId),
     params: { productId },
-    data: { product: productData },
+    data: { product: values },
   });
+};
 
 export const fetchOrigins = () => axios({ method: 'get', url: API_URLs.ORIGINS.INDEX });

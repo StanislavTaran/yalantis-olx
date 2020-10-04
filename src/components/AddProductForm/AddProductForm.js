@@ -1,36 +1,20 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
+import addProductSchema from '../../helpers/schemas/addProductSchema';
+import Modal from '../Portal/Modal/Modal';
 import Input from '../share/inputs/Input/Input';
 import Button from '../share/buttons/Button/Button';
-import Modal from '../Portal/Modal/Modal';
-import { getIsShowProductForm } from '../../redux/app/appSelectors';
-import { showProductForm } from '../../redux/app/appActions';
-import { getEditedProduct } from '../../redux/products/productsSelectors';
-import { postProduct, patchProduct } from '../../redux/products/productsOperations';
-import addProductSchema from '../../helpers/schemas/addProductSchema';
 import styles from './AddProductForm.module.css';
 
-function AddProductForm({ origins }) {
-  const dispatch = useDispatch();
-
-  const editedProduct = useSelector(getEditedProduct);
-  const isEdit = !!Object.keys(editedProduct).length;
-
-  const isShowProductForm = useSelector(getIsShowProductForm);
-  const handleOpenProductForm = () => dispatch(showProductForm(!isShowProductForm));
-
-  const handleSubmit = (id, values) => {
-    isEdit ? dispatch(patchProduct(id, values)) : dispatch(postProduct(values));
-  };
-
-  const initialState = {
-    name: isEdit ? editedProduct.name : '',
-    price: isEdit ? editedProduct.price : 0,
-    origin: isEdit ? editedProduct.origin : '',
-  };
-
+export default function AddProductForm({
+  initialState,
+  origins,
+  handleSubmit,
+  isEdit,
+  editedProduct,
+  handleOpenProductForm,
+}) {
   return (
     <Formik
       initialValues={initialState}
@@ -42,7 +26,7 @@ function AddProductForm({ origins }) {
       {({ errors, touched, values, isSubmitting, handleChange, handleBlur, handleReset }) => (
         <Modal onClose={handleOpenProductForm}>
           <div className={styles.container}>
-            <h2 className={styles.formTitile}>{`${isEdit ? 'EDIT' : 'ADD'} YOUR  PRODUCT`}</h2>
+            <h2 className={styles.formTitle}>{`${isEdit ? 'EDIT' : 'ADD'} YOUR  PRODUCT`}</h2>
             <Form>
               <label htmlFor="name">
                 Name* :
@@ -95,8 +79,19 @@ function AddProductForm({ origins }) {
   );
 }
 
-export default AddProductForm;
-
 AddProductForm.propTypes = {
   origins: propTypes.arrayOf(propTypes.shape({ value: propTypes.string, displayName: propTypes.string })).isRequired,
+  initialState: propTypes.shape({
+    name: propTypes.string.isRequired,
+    price: propTypes.number.isRequired,
+    origin: propTypes.string.isRequired,
+  }).isRequired,
+  handleSubmit: propTypes.func.isRequired,
+  isEdit: propTypes.bool.isRequired,
+  editedProduct: propTypes.shape({
+    name: propTypes.string.isRequired,
+    price: propTypes.number.isRequired,
+    origin: propTypes.string.isRequired,
+  }),
+  handleOpenProductForm: propTypes.func.isRequired,
 };

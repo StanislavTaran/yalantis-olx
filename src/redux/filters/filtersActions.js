@@ -15,3 +15,9 @@ export const setPerPage = createAction('filters/SET_PER_PAGE');
 
 // RESET
 export const resetFilters = createAction('filters/RESET');
+
+//EDITABLE
+export const setEditable = createAction('filters/SET_EDITABLE');
+
+// SET FROM URL
+export const setFilters = createAction('filters/SET_FROM_URL');

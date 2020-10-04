@@ -3,7 +3,8 @@ import { combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import { reducer as toastrReducer } from 'react-redux-toastr';
 import storage from 'redux-persist/lib/storage';
-import ReduxThunk from 'redux-thunk';
+import rootSaga from './rootSaga';
+import createSagaMiddleware from 'redux-saga';
 
 import products from './products/productsReducer';
 import app from './app/appReducer';
@@ -11,12 +12,14 @@ import cart from './cart/cartReducer';
 import filters from './filters/filtersReducer';
 import auth from './auth/authReducer';
 
+const sagaMiddleware = createSagaMiddleware();
+
 const persistConfig = {
   key: 'cart',
   storage,
 };
 
-const middlewares = [ReduxThunk];
+const middlewares = [sagaMiddleware];
 
 const rootReducer = combineReducers({
   app,
@@ -34,3 +37,5 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+sagaMiddleware.run(rootSaga);

@@ -1,32 +1,15 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import SimpleLabel from '../share/labels/SimpleLabel/SimpleLabel';
+import propTypes from 'prop-types';
+import styles from './Header.module.css';
+import { Link, NavLink } from 'react-router-dom';
 import routes from '../../constants/routes';
 import CircleButton from '../share/buttons/CircleButton/CircleButton';
-import styles from './Header.module.css';
-import cartSVG from '../../images/cart.svg';
 import plusSVG from '../../images/plus.svg';
+import cartSVG from '../../images/cart.svg';
+import SimpleLabel from '../share/labels/SimpleLabel/SimpleLabel';
 import currencyFormatter from '../../helpers/currencyFormatter';
-import { getTotalPrice, getTotalQuantity } from '../../redux/cart/cartSelectors';
-import { getIsShowProductForm } from '../../redux/app/appSelectors';
-import { showProductForm } from '../../redux/app/appActions';
-import { setEditedProduct } from '../../redux/products/productsActions';
 
-export default function Header() {
-  const { pathname } = useLocation();
-  const totalPrice = useSelector(getTotalPrice);
-  const totalQuantity = useSelector(getTotalQuantity);
-
-  const dispatch = useDispatch();
-  const isShowProductForm = useSelector(getIsShowProductForm);
-
-  const handleOpenProductForm = () => {
-    dispatch(setEditedProduct({}));
-    dispatch(showProductForm(!isShowProductForm));
-  };
-
+export default function Header({ pathname, totalQuantity, totalPrice, handleOpenProductForm }) {
   return (
     <header className={styles.header}>
       <Link to={{ pathname: routes.INDEX.INDEX, state: { resetFilters: true } }} className={styles.link}>
@@ -59,3 +42,10 @@ export default function Header() {
     </header>
   );
 }
+
+Header.propTypes = {
+  pathname: propTypes.string.isRequired,
+  handleOpenProductForm: propTypes.func.isRequired,
+  totalQuantity: propTypes.number.isRequired,
+  totalPrice: propTypes.number.isRequired,
+};
