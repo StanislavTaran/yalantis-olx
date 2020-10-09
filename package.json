@@ -2,15 +2,23 @@
   "name": "yalantis-olx",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://StanislavTaran.github.io/yalantis-olx",
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.8",
+    "@types/react": "^16.9.51",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.6",
     "axios": "^0.20.0",
     "debounce": "^1.2.0",
     "dotenv": "^8.2.0",
     "formik": "^2.1.5",
+    "gh-pages": "^3.1.0",
     "history": "^4.10.1",
     "moment": "^2.27.0",
     "prettier": "^2.0.5",
@@ -30,13 +38,16 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.3",
     "reselect": "^4.0.0",
+    "typescript": "^4.0.3",
     "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

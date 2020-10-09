@@ -1,5 +1,4 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import styles from './Header.module.css';
 import { Link, NavLink } from 'react-router-dom';
 import routes from '../../constants/routes';
@@ -9,7 +8,14 @@ import cartSVG from '../../images/cart.svg';
 import SimpleLabel from '../share/labels/SimpleLabel/SimpleLabel';
 import currencyFormatter from '../../helpers/currencyFormatter';
 
-export default function Header({ pathname, totalQuantity, totalPrice, handleOpenProductForm }) {
+type PropsType = {
+  pathname: string;
+  totalQuantity: number;
+  totalPrice: number;
+  handleOpenProductForm: () => void;
+};
+
+const Header: React.FC<PropsType> = ({ pathname, totalQuantity, totalPrice, handleOpenProductForm }) => {
   return (
     <header className={styles.header}>
       <Link to={{ pathname: routes.INDEX.INDEX, state: { resetFilters: true } }} className={styles.link}>
@@ -41,11 +47,6 @@ export default function Header({ pathname, totalQuantity, totalPrice, handleOpen
       </div>
     </header>
   );
-}
-
-Header.propTypes = {
-  pathname: propTypes.string.isRequired,
-  handleOpenProductForm: propTypes.func.isRequired,
-  totalQuantity: propTypes.number.isRequired,
-  totalPrice: propTypes.number.isRequired,
 };
+
+export default Header;
