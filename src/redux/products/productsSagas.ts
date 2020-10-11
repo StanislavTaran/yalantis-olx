@@ -1,5 +1,5 @@
 import { put, call, takeEvery, select, delay } from 'redux-saga/effects';
-import * as productsActions from '../products/productsActions';
+import * as productsActions from './productsActions';
 import * as appActions from '../app/appActions';
 import { getFilters } from '../filters/filtersSelectors';
 import { mapFiltersToParams } from '../../helpers/mapFiltersToParams';
@@ -7,6 +7,7 @@ import { pushToUrl } from '../../helpers/history/URLHelpers';
 import * as olxAPI from '../../api/olxAPI';
 import { toastr } from 'react-redux-toastr';
 import { SUCCES, ERRORS } from '../../constants/notifications';
+import * as payloadTypes from './types/payloadTypes';
 
 export function* fetchAllProducts() {
   try {
@@ -45,7 +46,11 @@ export function* getOrigins() {
   }
 }
 
-export function* fetchOneProduct({ payload: productId }) {
+type FetchOneProductProps = {
+  payload: string;
+};
+
+export function* fetchOneProduct({ payload: productId }: FetchOneProductProps) {
   try {
     const res = yield call(olxAPI.fetchOneProduct, productId);
     yield put(productsActions.getCurrentProductSucces(res.data));
@@ -54,7 +59,11 @@ export function* fetchOneProduct({ payload: productId }) {
   }
 }
 
-export function* postProduct({ payload: data }) {
+type PostProductProps = {
+  payload: { name: string; price: number; origin: string };
+};
+
+export function* postProduct({ payload: data }: PostProductProps) {
   try {
     const res = yield call(olxAPI.postProduct, data);
     yield put(productsActions.postProductSucces(res.data));
@@ -67,7 +76,14 @@ export function* postProduct({ payload: data }) {
   }
 }
 
-export function* patchProduct({ payload: { productId, values } }) {
+type patchProductProps = {
+  payload: {
+    productId: string;
+    values: payloadTypes.PatchProductType;
+  };
+};
+
+export function* patchProduct({ payload: { productId, values } }: patchProductProps) {
   try {
     const res = yield call(olxAPI.patchProduct, { productId, values });
     yield put(productsActions.patchProductSucces(res.data));
