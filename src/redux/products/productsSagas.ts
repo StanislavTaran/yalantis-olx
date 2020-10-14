@@ -7,7 +7,6 @@ import { pushToUrl } from '../../helpers/history/URLHelpers';
 import * as olxAPI from '../../api/olxAPI';
 import { toastr } from 'react-redux-toastr';
 import { SUCCES, ERRORS } from '../../constants/notifications';
-import * as payloadTypes from './types/payloadTypes';
 
 export function* fetchAllProducts() {
   try {
@@ -46,11 +45,7 @@ export function* getOrigins() {
   }
 }
 
-type FetchOneProductProps = {
-  payload: string;
-};
-
-export function* fetchOneProduct({ payload: productId }: FetchOneProductProps) {
+export function* fetchOneProduct({ payload: productId }: ReturnType<typeof productsActions.getCurrentProductRequest>) {
   try {
     const res = yield call(olxAPI.fetchOneProduct, productId);
     yield put(productsActions.getCurrentProductSucces(res.data));
@@ -59,11 +54,7 @@ export function* fetchOneProduct({ payload: productId }: FetchOneProductProps) {
   }
 }
 
-type PostProductProps = {
-  payload: { name: string; price: number; origin: string };
-};
-
-export function* postProduct({ payload: data }: PostProductProps) {
+export function* postProduct({ payload: data }: ReturnType<typeof productsActions.postProductRequest>) {
   try {
     const res = yield call(olxAPI.postProduct, data);
     yield put(productsActions.postProductSucces(res.data));
@@ -76,14 +67,9 @@ export function* postProduct({ payload: data }: PostProductProps) {
   }
 }
 
-type patchProductProps = {
-  payload: {
-    productId: string;
-    values: payloadTypes.PatchProductType;
-  };
-};
-
-export function* patchProduct({ payload: { productId, values } }: patchProductProps) {
+export function* patchProduct({
+  payload: { productId, values },
+}: ReturnType<typeof productsActions.patchProductRequest>) {
   try {
     const res = yield call(olxAPI.patchProduct, { productId, values });
     yield put(productsActions.patchProductSucces(res.data));

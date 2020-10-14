@@ -1,6 +1,8 @@
 import axios from 'axios';
 import qs from 'qs';
 import API_URLs from '../constants/olxAPI';
+import * as productsPayloadTypes from '../redux/products/types/payloadTypes';
+import * as filtersPayloadTypes from '../redux/filters/types/payloadsTypes';
 
 const { REACT_APP_API_TOKEN } = process.env;
 
@@ -8,7 +10,7 @@ axios.defaults.headers.common['Authorization'] = REACT_APP_API_TOKEN;
 axios.defaults.baseURL = API_URLs.BASE_URL.INDEX;
 axios.defaults.params = {};
 
-export const fetchProducts = params =>
+export const fetchProducts = (params?: filtersPayloadTypes.FiltersType) =>
   axios({
     method: 'get',
     url: API_URLs.PRODUCTS.INDEX,
@@ -18,13 +20,13 @@ export const fetchProducts = params =>
     },
   });
 
-export const fetchOneProduct = productId =>
+export const fetchOneProduct = (productId: string) =>
   axios({
     method: 'get',
     url: API_URLs.PRODUCT.createURL(productId),
   });
 
-export const fetchOwnProducts = params =>
+export const fetchOwnProducts = (params?: filtersPayloadTypes.FiltersType) =>
   axios({
     method: 'get',
     url: API_URLs.PRODUCTS.INDEX,
@@ -34,14 +36,19 @@ export const fetchOwnProducts = params =>
     },
   });
 
-export const postProduct = productData =>
+export const postProduct = (productData: productsPayloadTypes.PostProductType) =>
   axios({
     method: 'post',
     url: API_URLs.PRODUCTS.INDEX,
     data: { product: productData },
   });
 
-export const patchProduct = ({ productId, values }) => {
+type patchProductParamsType = {
+  productId: string;
+  values: productsPayloadTypes.PostProductType;
+};
+
+export const patchProduct = ({ productId, values }: patchProductParamsType) => {
   return axios({
     method: 'patch',
     url: API_URLs.PRODUCT.createURL(productId),

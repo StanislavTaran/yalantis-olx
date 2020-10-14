@@ -1,7 +1,5 @@
-export type IsEditableType = true | false;
-
 export type ProductType = {
-  isEditable: IsEditableType;
+  isEditable: boolean;
   id: string;
   name: string;
   price: number;
@@ -17,15 +15,15 @@ export type PostProductType = {
 };
 
 export type PatchProductType = {
-  id: string;
-  name: string;
-  price: number;
-  origin: string;
-  createdAt: string;
-  updatedAt: string;
+  productId: string;
+  values: {
+    name: string;
+    price: number;
+    origin: string;
+  };
 };
 
 export type OriginType = {
   value: string;
-  displayValue: string;
+  displayName: string;
 };

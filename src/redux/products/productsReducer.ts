@@ -22,10 +22,10 @@ const productsInitialState: IProducts = {
 };
 
 const products = createReducer(productsInitialState.products, {
-  [productsActions.getProductsSucces.type]: (state, action: PayloadAction<resTypes.ResProductsType>) => [
+  [productsActions.getProductsSucces.type]: (state, action: PayloadAction<resTypes.ProductsServerData>) => [
     ...action.payload.items,
   ],
-  [productsActions.getOwnProductsSucces.type]: (state, action: PayloadAction<resTypes.ResProductsType>) => [
+  [productsActions.getOwnProductsSucces.type]: (state, action: PayloadAction<resTypes.ProductsServerData>) => [
     ...action.payload.items,
   ],
   [productsActions.postProductSucces.type]: (state, action: PayloadAction<payloadsTypes.ProductType>) => [
@@ -57,9 +57,9 @@ const origins = createReducer(productsInitialState.origins, {
 });
 
 const totalProducts = createReducer(productsInitialState.totalProducts, {
-  [productsActions.getProductsSucces.type]: (state, action: PayloadAction<resTypes.ResProductsType>) =>
+  [productsActions.getProductsSucces.type]: (state, action: PayloadAction<resTypes.ProductsServerData>) =>
     action.payload.totalItems,
-  [productsActions.getOwnProductsSucces.type]: (state, action: PayloadAction<resTypes.ResProductsType>) =>
+  [productsActions.getOwnProductsSucces.type]: (state, action: PayloadAction<resTypes.ProductsServerData>) =>
     action.payload.totalItems,
 });
 
