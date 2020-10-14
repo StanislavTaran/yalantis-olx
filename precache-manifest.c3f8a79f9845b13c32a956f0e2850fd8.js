@@ -1,51 +1,51 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7c33fac3665909099bc7c9e2680bf93a",
+    "revision": "da5d9f915327550b5ebd5fdbdf5a88d6",
     "url": "/yalantis-olx/index.html"
   },
   {
-    "revision": "7833b0906ff564db6a45",
+    "revision": "70af68cfa9da7897bc60",
     "url": "/yalantis-olx/static/css/5.b42794fd.chunk.css"
   },
   {
-    "revision": "edee3ec27526a49007bd",
+    "revision": "d24f0d93c8178ce78055",
     "url": "/yalantis-olx/static/css/cart-page.b62948f8.chunk.css"
   },
   {
-    "revision": "9095a7c7804df5874a94",
-    "url": "/yalantis-olx/static/css/main.4e652f31.chunk.css"
+    "revision": "50c2ce3e0948e8de1514",
+    "url": "/yalantis-olx/static/css/main.30dbe7af.chunk.css"
   },
   {
-    "revision": "7d406b8f013b2b02aa26",
+    "revision": "f488808131eb54803ff9",
     "url": "/yalantis-olx/static/css/products-page.5ff6e4e6.chunk.css"
   },
   {
-    "revision": "7833b0906ff564db6a45",
-    "url": "/yalantis-olx/static/js/5.e3d7b187.chunk.js"
+    "revision": "70af68cfa9da7897bc60",
+    "url": "/yalantis-olx/static/js/5.67851a70.chunk.js"
   },
   {
     "revision": "be3ae91867bd4c806afeb90c76d5e54f",
-    "url": "/yalantis-olx/static/js/5.e3d7b187.chunk.js.LICENSE.txt"
+    "url": "/yalantis-olx/static/js/5.67851a70.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "edee3ec27526a49007bd",
-    "url": "/yalantis-olx/static/js/cart-page.83d32c4c.chunk.js"
+    "revision": "d24f0d93c8178ce78055",
+    "url": "/yalantis-olx/static/js/cart-page.fb1990d6.chunk.js"
   },
   {
-    "revision": "9095a7c7804df5874a94",
-    "url": "/yalantis-olx/static/js/main.51b1c8de.chunk.js"
+    "revision": "50c2ce3e0948e8de1514",
+    "url": "/yalantis-olx/static/js/main.37727635.chunk.js"
   },
   {
-    "revision": "03b1ec1b6aa49bb55337",
-    "url": "/yalantis-olx/static/js/own-products-page.96ae7ffb.chunk.js"
+    "revision": "0bfd81d178d3a08cb0f0",
+    "url": "/yalantis-olx/static/js/own-products-page.7b4f6715.chunk.js"
   },
   {
-    "revision": "7d406b8f013b2b02aa26",
-    "url": "/yalantis-olx/static/js/products-page.eb740571.chunk.js"
+    "revision": "f488808131eb54803ff9",
+    "url": "/yalantis-olx/static/js/products-page.55b4f613.chunk.js"
   },
   {
-    "revision": "6b2189a86ceb8cdd7a14",
-    "url": "/yalantis-olx/static/js/runtime-main.efa3482d.js"
+    "revision": "18d46f97ea62b413f596",
+    "url": "/yalantis-olx/static/js/runtime-main.07f2c1b0.js"
   },
   {
     "revision": "59a2698d6bf887641231d16043225011",
